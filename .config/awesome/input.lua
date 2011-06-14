@@ -90,10 +90,13 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "n",      function (c) c.minimized = not c.minimized    end),
 
     awful.key({ modkey }, "a", function (c)
-        log("role " .. c.role)
-        log("window " .. c.window)
-        log("type " .. c.type)
-        log("transient " .. (c.transient_for or 'nil'))
+        print("role      " .. (c.role or 'Nil'))
+        print("class     " .. (c.class or 'Nil'))
+        print("window    " .. (c.window or 'Nil'))
+        print("type      " .. (c.type or 'Nil'))
+        print("transient " .. (c.transient_for and 'Y' or 'nil'))
+        print('-')
+        io.stdout:flush()
     end),
 
     awful.key({ modkey,           }, "m",

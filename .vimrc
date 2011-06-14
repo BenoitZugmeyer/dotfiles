@@ -94,13 +94,18 @@ set makeef=error.err          " Erreur de make.
 set laststatus=2    " Toujours avoir la barre de statut
 set statusline=%<%F%=[%{&ff}%Y,%{&fenc}]\ [%1*%M%R%0*%n%W]\ [POS=%03v,%04l/%04L\ %P]
 
-set listchars=nbsp:•,tab:>-,trail:•,extends:>,precedes:<
+set listchars=nbsp:•,tab:⋮\ ,trail:•,extends:>,precedes:<
 set list                " je connaissais pas, c'est cool ça ! par contre, faudrait mapper un truc pour activer/désactiver pour le copier/coller
 
 set scrolloff=15    " Garder 15 lignes autour du curseur ;
 let mapleader = "\<F12>"
 nnoremap <C-C> :q<cr>
 
+noremap <F5> :tabN<cr>
+noremap <F6> :tabn<cr>
+inoremap <F5> <esc>:tabN<cr>
+inoremap <F6> <esc>:tabn<cr>
+noremap ù %
 
 function! ResCur()
     if line("'\"") <= line("$")
@@ -116,5 +121,5 @@ augroup END
 
 
 
-set colorcolumn=81
+set colorcolumn=80
 hi ColorColumn ctermbg=236 guibg=#2d2d2d

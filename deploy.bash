@@ -8,6 +8,7 @@ SCRIPT=$(basename $0)
 IGNORE="
 .gitmodules
 .gitignore
+.netrc
 $SCRIPT
 "
 

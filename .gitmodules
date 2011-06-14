@@ -1,3 +1,3 @@
 [submodule ".config/awesome/i3lock"]
 	path = .config/awesome/i3lock
-	url = http://code.stapelberg.de/i3lock
+	url = git://code.stapelberg.de/i3lock
