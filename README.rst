@@ -3,6 +3,7 @@ files for:
  * vim
  * zsh
  * awesome wm
+ * git
  * top
 
 Feel free to contribute or ask anything.
