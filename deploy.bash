@@ -9,6 +9,7 @@ IGNORE="
 .gitmodules
 .gitignore
 .netrc
+README.rst
 $SCRIPT
 "
 
