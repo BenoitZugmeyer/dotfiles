@@ -1,5 +1,6 @@
 Here is a subset of the dotfiles I use everyday. You'll find configuration
 files for:
+
  * vim
  * zsh
  * awesome wm
@@ -12,6 +13,7 @@ Deploying
 ---------
 
 Run  ``./deploy.bash``. It is pretty safe:
+
  * compare the repo files to the ones you have in your home
  * if a file is missing, it will be hardlinked
  * if a file is here and has the same md5sum, it will be removed then
