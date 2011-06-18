@@ -6,7 +6,6 @@ case $TERM in rxvt*) TERM=rxvt esac  # urxvt only, TERM value is not recognized
 
 autoload colors; colors  # so we can use $fg / $bg
 source /etc/profile  # autojump support
-source ~/.zsh/zshrc.sh  # git prompt
 
 # Environment
 # ===========
@@ -126,6 +125,7 @@ bindkey '.' rationalise-dot
 # ======
 
 autoload -U promptinit; promptinit  # collection of predefined prompts
+setopt prompt_subst  # Allow for functions in the prompt.
 
 prompt_alk_setup() {
     PROMPT="%{$fg_bold[blue]%}%~%(40l.
@@ -158,6 +158,7 @@ alias pacman=pacman-color  # install pacman-color from archlinux.fr repo.
                            # pacman-color to the very first line (#compdef)
 alias less='less -R'
 alias k=kate
+alias diffdists='ls *-dist -1 | sed "s/-dist//" | while read file; do echo "DIFF $file"; diff $file-dist $file; done'
 
 # Confirm file deletion / overright
 alias cp='cp -i'
@@ -218,7 +219,6 @@ if which fortune &> /dev/null; then
     fortune kaamelott 2> /dev/null || fortune
 fi
 
-alias diffdists='ls *-dist -1 | sed "s/-dist//" | while read file; do echo "DIFF $file"; diff $file-dist $file; done'
 
 function superpkill() {
 
@@ -251,5 +251,64 @@ function superpkill() {
         fi
 
         kill `echo "$pids" | grep -Eo '^\s*[0-9]+' | tr -d ' '`
+    fi
+}
+
+
+# Complete rewrite of olivierverdier git-prompt in pure zsh
+# https://github.com/olivierverdier/zsh-git-prompt
+# Much faster (no python overhead), and no cache needed as 'git status' has a
+# pretty good cache itself
+__GIT_AHEAD='↑'
+__GIT_BEHIND='↓'
+__GIT_STAGED='♦'
+__GIT_CHANGED='‣'
+__GIT_UNTRACKED='…'
+__GIT_CLEAN='⚡'
+__GIT_UNMERGED='≠'
+__GIT_SHA1=':'
+
+function prompt_git_info() {
+    staged=0
+    unmerged=0
+    changed=0
+    untracked=0
+    branch=""
+    remote=""
+    while IFS="" read -r line; do
+        if [[ $line = (## *) ]]; then
+            if [[ $line =~ '^## ([^.(]*)[^\[(]*(\[.*?\])?$' ]]; then
+                branch=$match[1]
+                d=$match[2]
+                [[ $d =~ 'behind ([0-9]+)' ]] &&
+                    remote="$remote$__GIT_BEHIND$match[1]"
+                [[ $d =~ 'ahead ([0-9]+)'  ]] &&
+                    remote="$remote$__GIT_AHEAD$match[1]"
+            else
+                branch="$__GIT_SHA1`git rev-parse --short HEAD`"
+            fi
+        elif [[ $line == ((DD|AA|U?|?U) *) ]]; then
+            unmerged=$(($unmerged + 1))
+        else
+            [[ $line == ([^? ]? *) ]] && staged=$(($staged + 1))
+            [[ $line == (?[^? ] *) ]] && changed=$(($changed + 1))
+            [[ $line == (\?\?\ *)  ]] && untracked=$(($untracked + 1))
+        fi
+    done < <(git status -s -unormal -b 2> /dev/null)
+
+    [[ -z $branch ]] && return
+
+    printf "%%{${fg[blue]}%%}%s%%{${fg[cyan]}%%}%s%%{$reset_color%%}" "$branch" "$remote"
+    if [[ $staged -eq 0 && $unmerged -eq 0 && $changed -eq 0
+       && $untracked -eq 0 ]]
+    then
+        printf "$__GIT_CLEAN"
+    else
+        [[ $staged -gt 0    ]] &&
+            printf "%%{${fg[green]}%%}$__GIT_STAGED%d%%{$reset_color%%}" $staged
+        [[ $changed -gt 0   ]] && printf "$__GIT_CHANGED%d" $changed
+        [[ $unmerged -gt 0  ]] &&
+            printf "%%{${fg[red]}%%}$__GIT_UNMERGED%d%%{$reset_color%%}" $unmerged
+        [[ $untracked -gt 0 ]] && printf "$__GIT_UNTRACKED"
     fi
 }
