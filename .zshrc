@@ -277,9 +277,9 @@ function prompt_git_info() {
     remote=""
     while IFS="" read -r line; do
         if [[ $line = (## *) ]]; then
-            if [[ $line =~ '^## ([^.(]*)[^\[(]*(\[.*?\])?$' ]]; then
+            if [[ $line =~ '^## (([^.\[(]|\.[^.\[(])+)[^\[(]*(\[.*?\])?$' ]]; then
                 branch=$match[1]
-                d=$match[2]
+                d=$match[3]
                 [[ $d =~ 'behind ([0-9]+)' ]] &&
                     remote="$remote$__GIT_BEHIND$match[1]"
                 [[ $d =~ 'ahead ([0-9]+)'  ]] &&
