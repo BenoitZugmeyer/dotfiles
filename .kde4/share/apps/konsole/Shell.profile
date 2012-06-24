@@ -1,21 +1,22 @@
 [Appearance]
 ColorScheme=alk
-Font=DejaVu Sans Mono,8,-1,5,50,0,0,0,0,0
+Font=DejaVu Sans Mono,9.5,-1,5,50,0,0,0,0,0
 
 [Cursor Options]
 CursorShape=0
 
 [General]
 Icon=utilities-terminal
-LocalTabTitleFormat=%d : %n
+LocalTabTitleFormat=%n : %w
 MenuIndex=1
 Name=Shell
 Parent=FALLBACK/
-RemoteTabTitleFormat=%h : %u
+RemoteTabTitleFormat=%u@%h : %w
 TabBarMode=0
 
 [Interaction Options]
 TripleClickSelectsFromCursor=false
+WordCharacters=@-./_~?&=%+#
 
 [Keyboard]
 KeyBindings=xterm
@@ -26,4 +27,4 @@ ScrollBarPosition=2
 
 [Terminal Features]
 BidiRenderingEnabled=true
-FlowControlEnabled=true
+FlowControlEnabled=false

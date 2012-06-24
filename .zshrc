@@ -159,6 +159,7 @@ alias pacman=pacman-color  # install pacman-color from archlinux.fr repo.
 alias less='less -R'
 alias k=kate
 alias diffdists='ls *-dist -1 | sed "s/-dist//" | while read file; do echo "DIFF $file"; diff $file-dist $file; done'
+alias psg='ps aux | grep -v grep | grep'
 
 # Confirm file deletion / overright
 alias cp='cp -i'
@@ -262,10 +263,10 @@ function superpkill() {
 __GIT_AHEAD='↑'
 __GIT_BEHIND='↓'
 __GIT_STAGED='♦'
-__GIT_CHANGED='‣'
+__GIT_CHANGED='✚'
 __GIT_UNTRACKED='…'
-__GIT_CLEAN='⚡'
-__GIT_UNMERGED='≠'
+__GIT_CLEAN='✔'
+__GIT_UNMERGED='✖'
 __GIT_SHA1=':'
 
 function prompt_git_info() {
@@ -302,7 +303,7 @@ function prompt_git_info() {
     if [[ $staged -eq 0 && $unmerged -eq 0 && $changed -eq 0
        && $untracked -eq 0 ]]
     then
-        printf "$__GIT_CLEAN"
+        printf "%%{${fg_bold[green]}%%}$__GIT_CLEAN%%{$reset_color%%}"
     else
         [[ $staged -gt 0    ]] &&
             printf "%%{${fg[green]}%%}$__GIT_STAGED%d%%{$reset_color%%}" $staged

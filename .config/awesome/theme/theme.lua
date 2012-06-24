@@ -8,7 +8,7 @@
 local root = config.config_path .. '/theme'
 -- {{{ Main
 theme = {}
-theme.wallpaper_cmd = { "awsetbg /home/alk/.config/awesome/wallpaper" }
+theme.wallpaper_cmd = { "feh --bg-tile /home/alk/.config/awesome/wallpaper" }
 -- }}}
 
 -- {{{ Styles

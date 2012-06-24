@@ -2,7 +2,7 @@
 
 layouts = {
 --    awful.layout.suit.floating,
---    awful.layout.suit.tile,
+    awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
 --    awful.layout.suit.tile.top,
@@ -16,7 +16,7 @@ layouts = {
 }
 
 local defaultlayouts = {
-    awful.layout.suit.tile.left,
+    awful.layout.suit.tile,
     awful.layout.suit.tile.bottom,
 }
 
@@ -28,3 +28,6 @@ for s = 1, screen.count() do
     tags[s] = awful.tag({ "α", "β", "γ", "δ", "ε" }, s, defaultlayouts[s])
 end
 awful.tag.setmwfact(0.618, tags[1][1])
+if screen.count() == 1 then
+    tags[2] = tags[1]
+end

@@ -1,14 +1,14 @@
-RCfile for "top with windows"		# shameless braggin'
-Id:a, Mode_altscr=0, Mode_irixps=1, Delay_time=3.000, Curwin=0
-Def	fieldscur=AEHIOQTWKNMbcdfgjplrsuvyzX
-	winflags=65336, sortindx=10, maxtasks=0
-	summclr=4, msgsclr=7, headclr=4, taskclr=7
-Job	fieldscur=ABcefgjlrstuvyzMKNHIWOPQDX
-	winflags=62777, sortindx=1, maxtasks=0
+top's Config File (Linux processes with windows)
+Id:f, Mode_altscr=0, Mode_irixps=1, Delay_time=3,000, Curwin=0
+Def	fieldscur=¥¨³´»½ÀÄ·º¹Å&')*+,-./012568<>?ABCFGHIJKLMNOPQRSTUVWXYZ[
+	winflags=65332, sortindx=21, maxtasks=0
+	summclr=7, msgsclr=2, headclr=7, taskclr=2
+Job	fieldscur=¥¦¹·º³´Ä»¼½§Å()*+,-./012568>?@ABCFGHIJKLMNOPQRSTUVWXYZ[
+	winflags=62772, sortindx=0, maxtasks=0
 	summclr=6, msgsclr=6, headclr=7, taskclr=6
-Mem	fieldscur=ANOPQRSTUVbcdefgjlmyzWHIKX
-	winflags=62777, sortindx=13, maxtasks=0
+Mem	fieldscur=¥º»¼½¾¿ÀÁÃÄ³´·Å&'()*+,-./0125689BFGHIJKLMNOPQRSTUVWXYZ[
+	winflags=62772, sortindx=21, maxtasks=0
 	summclr=5, msgsclr=5, headclr=4, taskclr=5
-Usr	fieldscur=ABDECGfhijlopqrstuvyzMKNWX
-	winflags=62777, sortindx=4, maxtasks=0
+Usr	fieldscur=¥¦§¨ª°¹·ºÄÅ)+,-./1234568;<=>?@ABCFGHIJKLMNOPQRSTUVWXYZ[
+	winflags=62772, sortindx=3, maxtasks=0
 	summclr=3, msgsclr=3, headclr=2, taskclr=3

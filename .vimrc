@@ -84,6 +84,15 @@ set incsearch               " Incrementally search while typing a /regex
 set backupdir=~/.vim/tmp
 set directory=~/.vim/tmp
 
+let g:ctrlp_by_filename = 1
+let g:ctrlp_max_height = 20
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtBS()':      ['<bs>', '<c-]>', '<c-h>'],
+  \ 'PrtCurLeft()': ['<left>', '<c-^>'],
+  \ 'ToggleType(1)': ['<c-f>', '<c-up>', '<F1>'],
+  \ }
+let g:ctrlp_max_files = 0
+let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files']
 
 " Restore cursor position on opening a file
 function! ResCur()
@@ -174,24 +183,24 @@ nnoremap - ddp
 nnoremap _ ddkP
 
 " Open file
-noremap <F1> :FufGitFile<cr>
-inoremap <F1> <C-o>:FufGitFile<cr>
-noremap <F2> :FufBuffer<cr>
-inoremap <F2> <C-o>:FufBuffer<cr>
+noremap <F1> :CtrlP<cr>
+inoremap <F1> <C-o>:CtrlP<cr>
+noremap <F2> :CtrlPBuffer<cr>
+inoremap <F2> <C-o>:CtrlPBuffer<cr>
 
 " Clipboard
-nnoremap <C-F3>   "+yy
-vnoremap <C-F3>   "+y
-noremap  <C-F4>   "+gp
-inoremap <C-F3>   <c-o>"+yy
-inoremap <C-F4>   <c-o>"+gp
+" nnoremap <C-F3>   "+yy
+" vnoremap <C-F3>   "+y
+" noremap  <C-F4>   "+gp
+" inoremap <C-F3>   <c-o>"+yy
+" inoremap <C-F4>   <c-o>"+gp
 
 " Primary selection
-nnoremap <F3> "*yy
-vnoremap <F3> "*y
-noremap  <F4> "*gp
-inoremap <F3> <c-o>"*yy
-inoremap <F4> <c-o>"*gp
+" nnoremap <F3> "*yy
+" vnoremap <F3> "*y
+" noremap  <F4> "*gp
+" inoremap <F3> <c-o>"*yy
+" inoremap <F4> <c-o>"*gp
 
 " Usefull for working on themes
 function! SynStack()
@@ -205,6 +214,11 @@ nnoremap <Space> zMzvzczOzz
 
 " dvorak specific
 noremap ; :
+
+"nnoremap <silent><C-o> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
+"nnoremap <silent><C-S-o> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
+nnoremap <silent><C-o>   :set paste<CR>m`o<Esc>``:set nopaste<CR>
+"nnoremap <silent><C-O> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 "nnoremap b h
 "nnoremap h k

@@ -1,5 +1,6 @@
 require("naughty")
 
+launching_cmus = false
 local modkey = config.modkey
 
 root.buttons(awful.util.table.join(
@@ -15,7 +16,7 @@ end
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Next",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Prior",  awful.tag.viewnext       ),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
+    awful.key({ modkey,           }, "twosuperior", awful.tag.history.restore),
 
     awful.key({ modkey,           }, "Right",
         function ()
@@ -44,8 +45,8 @@ globalkeys = awful.util.table.join(
     -- awful.key({ 'any' }, modkey, nil, stopfocus),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(config.terminal) end),
-    awful.key({ modkey,           }, "!", function () awful.util.spawn(config.terminal .. " -e vim vi -c VimwikiIndex") end),
+    awful.key({ modkey,           }, "Return", spawn(config.terminal)),
+    awful.key({ modkey,           }, ".",      spawn(config.terminal .. " -e vim vi -c VimwikiIndex")),
     awful.key({ modkey, "Control" }, "r",      awesome.restart),
     awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
@@ -73,6 +74,15 @@ globalkeys = awful.util.table.join(
     awful.key({}, '#121', volume.toggle),
     awful.key({}, '#122', volume.decrease),
     awful.key({}, '#123', volume.increase),
+    awful.key({}, 'XF86AudioPlay', function ()
+        result = io.popen("cmus-remote -u 2>&1"):read("*all")
+        if result:match('cmus is not running') then
+            launching_cmus = true
+            awful.util.spawn(config.terminal .. ' -e cmus')
+        end
+    end),
+    awful.key({}, 'XF86AudioNext', spawn('cmus-remote -n')),
+    awful.key({}, 'XF86AudioPrev', spawn('cmus-remote -r')),
     awful.key({}, '#180', spawn('firefox-nightly')),
     awful.key({}, '#163', spawn('thunderbird')),
     awful.key({}, '#225', spawn('dolphin')),
@@ -89,15 +99,15 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
     awful.key({ modkey,           }, "n",      function (c) c.minimized = not c.minimized    end),
 
-    awful.key({ modkey }, "a", function (c)
-        print("role      " .. (c.role or 'Nil'))
-        print("class     " .. (c.class or 'Nil'))
-        print("window    " .. (c.window or 'Nil'))
-        print("type      " .. (c.type or 'Nil'))
-        print("transient " .. (c.transient_for and 'Y' or 'nil'))
-        print('-')
-        io.stdout:flush()
-    end),
+--    awful.key({ modkey }, "a", function (c)
+--        print("role      " .. (c.role or 'Nil'))
+--        print("class     " .. (c.class or 'Nil'))
+--        print("window    " .. (c.window or 'Nil'))
+--        print("type      " .. (c.type or 'Nil'))
+--        print("transient " .. (c.transient_for and 'Y' or 'nil'))
+--        print('-')
+--        io.stdout:flush()
+--    end),
 
     awful.key({ modkey,           }, "m",
         function (c)
