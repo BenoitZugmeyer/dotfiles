@@ -45,6 +45,11 @@
     resolve = update-index
     cia = commit --amend
     rbc = rebase --continue
+    cpc = cherry-pick --continue
+    wdfc = diff -b -w --word-diff=color --cached --word-diff-regex='\\(|\\)|[^[:space:]()]+'
 
 [rerere]
     enabled = true
+
+[merge]
+    conflictstyle = diff3

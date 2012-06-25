@@ -67,7 +67,7 @@ set showcmd                 " Show incomplete normal mode commands as I type.
 set report=0                " : commands always print changed line count.
 set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
 set laststatus=2            " Always show statusline, even if only 1 window.
-set statusline=%<%{fugitive#statusline()}\ %F\ %M%R%H%=%{&ff}%Y,%{&fenc}\ \|\ %v-%l/%L\ %P\ 
+set statusline=%<%{fugitive#statusline()}\ %F\ %M%R%H%=%{&ff}%Y,%{&fenc}\ \|\ %l/%L:%v\ %P\ 
 set colorcolumn=80
 
 " displays tabs with :set list & displays when a line runs off-screen
@@ -174,9 +174,10 @@ noremap ^ <Home>
 inoremap <Home> <C-O>^
 
 " Quick diff between buffer and file
-noremap <Leader>d :w !diff % -<CR>
+nnoremap <Leader>d :w !diff % -<CR>
 " Clear search (highlights)
 nnoremap <silent> <Leader><space> :let @/ = ""<Return>
+nnoremap <silent> <Leader>s ms:%s/\s\s*$//g<Return>'szz
 
 " Move current line up and down
 nnoremap - ddp
@@ -220,7 +221,20 @@ noremap ; :
 nnoremap <silent><C-o>   :set paste<CR>m`o<Esc>``:set nopaste<CR>
 "nnoremap <silent><C-O> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
-"nnoremap b h
-"nnoremap h k
-"nnoremap m j
-"nnoremap w l
+inoremap kk <Esc>
+noremap k :w<CR>
+
+" Surround comments with character /
+let g:surround_47 = "/* \r */"
+
+
+
+""" FocusMode
+let g:vimroom_width = &colorcolumn - 1
+function! ToggleFocusMode()
+    set noruler
+    set nolist
+    VimroomToggle
+endfunc
+nnoremap <F3> :call ToggleFocusMode()<cr>
+
