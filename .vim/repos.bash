@@ -111,6 +111,8 @@ repo pep8              https://github.com/vim-scripts/pep8.git
 repo ack               https://github.com/mileszs/ack.vim.git
 repo vividchalk        https://github.com/tpope/vim-vividchalk.git
 repo vimroom           https://github.com/mikewest/vimroom.git
+repo vimwiki           https://github.com/vim-scripts/vimwiki.git
+repo syntastic         https://github.com/scrooloose/syntastic.git
 
 repo snipmate          https://github.com/garbas/vim-snipmate.git # forked version
 repo tlib              https://github.com/tomtom/tlib_vim.git
@@ -124,11 +126,12 @@ sym fugitive
 sym surround
 sym git
 sym l9
-sym jslint
 sym javascript
 sym rust/src/etc/vim bundle/rust
 sym coffeescript
 sym vimroom
+sym vimwiki
+sym syntastic
 
 sym snipmate
 sym addon-mw-utils
