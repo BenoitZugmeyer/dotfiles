@@ -47,6 +47,7 @@
     rbc = rebase --continue
     cpc = cherry-pick --continue
     wdfc = diff -b -w --word-diff=color --cached --word-diff-regex='\\(|\\)|[^[:space:]()]+'
+    files = show --pretty="format:" --name-only
 
 [rerere]
     enabled = true
