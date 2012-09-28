@@ -94,33 +94,35 @@ dir autoload
 dir bundle
 dir tmp
 
-repo pathogen          https://github.com/tpope/vim-pathogen.git
-repo ctrlp             https://github.com/kien/ctrlp.vim
-repo fugitive          https://github.com/tpope/vim-fugitive.git
-repo git               https://github.com/tpope/vim-git.git
-repo gundo             https://github.com/sjl/gundo.vim.git
-repo align             https://github.com/tsaleh/vim-align.git
-repo javascript        https://github.com/pangloss/vim-javascript.git
-repo coffeescript      https://github.com/kchmck/vim-coffee-script.git
-repo jslint            https://github.com/hallettj/jslint.vim.git
-repo l9                https://github.com/slack/vim-l9.git
-repo rust              https://github.com/mozilla/rust.git
-repo solarized         https://github.com/altercation/vim-colors-solarized.git
-repo surround          https://github.com/tpope/vim-surround.git
-repo pep8              https://github.com/vim-scripts/pep8.git
-repo ack               https://github.com/mileszs/ack.vim.git
-repo vividchalk        https://github.com/tpope/vim-vividchalk.git
-repo vimroom           https://github.com/mikewest/vimroom.git
-repo vimwiki           https://github.com/vim-scripts/vimwiki.git
-repo syntastic         https://github.com/scrooloose/syntastic.git
+repo pathogen           https://github.com/tpope/vim-pathogen.git
+repo ctrlp              https://github.com/kien/ctrlp.vim
+repo fugitive           https://github.com/tpope/vim-fugitive.git
+repo git                https://github.com/tpope/vim-git.git
+repo gundo              https://github.com/sjl/gundo.vim.git
+repo align              https://github.com/tsaleh/vim-align.git
+repo javascript         https://github.com/pangloss/vim-javascript.git
+repo coffeescript       https://github.com/kchmck/vim-coffee-script.git
+repo jslint             https://github.com/hallettj/jslint.vim.git
+repo l9                 https://github.com/slack/vim-l9.git
+repo rust               https://github.com/mozilla/rust.git
+repo solarized          https://github.com/altercation/vim-colors-solarized.git
+repo surround           https://github.com/tpope/vim-surround.git
+repo pep8               https://github.com/vim-scripts/pep8.git
+repo ack                https://github.com/mileszs/ack.vim.git
+repo vividchalk         https://github.com/tpope/vim-vividchalk.git
+repo vimroom            https://github.com/mikewest/vimroom.git
+repo vimwiki            https://github.com/vim-scripts/vimwiki.git
+repo syntastic          https://github.com/scrooloose/syntastic.git
+repo tagbar             https://github.com/majutsushi/tagbar.git
 
-repo snipmate          https://github.com/garbas/vim-snipmate.git # forked version
-repo tlib              https://github.com/tomtom/tlib_vim.git
-repo addon-mw-utils    https://github.com/MarcWeber/vim-addon-mw-utils.git
-repo snipmate-snippets https://github.com/honza/snipmate-snippets.git
+repo snipmate           https://github.com/garbas/vim-snipmate.git # forked version
+repo tlib               https://github.com/tomtom/tlib_vim.git
+repo addon-mw-utils     https://github.com/MarcWeber/vim-addon-mw-utils.git
+repo snipmate-snippets  https://github.com/honza/snipmate-snippets.git
 
 
 sym pathogen/autoload/pathogen.vim autoload
+sym align
 sym ctrlp
 sym fugitive
 sym surround
@@ -132,6 +134,7 @@ sym coffeescript
 sym vimroom
 sym vimwiki
 sym syntastic
+sym tagbar
 
 sym snipmate
 sym addon-mw-utils

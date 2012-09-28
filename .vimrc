@@ -67,8 +67,10 @@ set showcmd                 " Show incomplete normal mode commands as I type.
 set report=0                " : commands always print changed line count.
 set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
 set laststatus=2            " Always show statusline, even if only 1 window.
-set statusline=%<%{fugitive#statusline()}\ %F\ %M%R%H%=%{&ff}%Y,%{&fenc}\ \|\ %l/%L:%v\ %P\ 
-set colorcolumn=80
+set statusline=%<%{fugitive#statusline()}\ %F\ %M%R%H
+set statusline+=%#warningmsg#%{SyntasticStatuslineFlag()}%*
+set statusline+=%=%{&ff}%Y,%{&fenc}\ \|\ %l/%L:%v\ %P\ 
+set colorcolumn=100
 
 " displays tabs with :set list & displays when a line runs off-screen
 set listchars=tab:⋮\ ,trail:•,precedes:<,extends:>
@@ -84,15 +86,20 @@ set incsearch               " Incrementally search while typing a /regex
 set backupdir=~/.vim/tmp
 set directory=~/.vim/tmp
 
+set backupcopy=yes
+
+let g:syntastic_auto_jump=1
+let g:syntastic_stl_format = 'Error line %F (%t)'
+
 let g:ctrlp_by_filename = 1
 let g:ctrlp_max_height = 20
 let g:ctrlp_prompt_mappings = {
   \ 'PrtBS()':      ['<bs>', '<c-]>', '<c-h>'],
   \ 'PrtCurLeft()': ['<left>', '<c-^>'],
-  \ 'ToggleType(1)': ['<c-f>', '<c-up>', '<F1>'],
   \ }
 let g:ctrlp_max_files = 0
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files']
+let g:ctrlp_mruf_max = 10000
 
 " Restore cursor position on opening a file
 function! ResCur()
@@ -132,10 +139,10 @@ noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
-noremap <c-left> <c-w>j
-noremap <c-down> <c-w>k
-noremap <c-up> <c-w>l
-noremap <c-right> <c-w>h
+noremap <c-left> <c-w>h
+noremap <c-down> <c-w>j
+noremap <c-up> <c-w>k
+noremap <c-right> <c-w>l
 " and lets make these all work in insert mode too ( <C-O> makes next cmd
 "  happen as if in command mode )
 inoremap <C-W> <C-O><C-W>
@@ -179,15 +186,25 @@ nnoremap <Leader>d :w !diff % -<CR>
 nnoremap <silent> <Leader><space> :let @/ = ""<Return>
 nnoremap <silent> <Leader>s ms:%s/\s\s*$//g<Return>'szz
 
+nnoremap <Leader>js ms
+    \ :%s/\s\s*$//ge<Return>
+    \ :%s/){/) {/ge<Return>
+    \ :%s/\<function(/function (/ge<Return>
+    \ :%s/\<if(/if (/ge<Return>
+    \ :%s/}\n\s*else/} else/ge<Return>
+    \ 'szz
+
 " Move current line up and down
 nnoremap - ddp
 nnoremap _ ddkP
 
 " Open file
-noremap <F1> :CtrlP<cr>
-inoremap <F1> <C-o>:CtrlP<cr>
+noremap <F1> :CtrlPMixed<cr>
+inoremap <F1> <C-o>:CtrlPMixed<cr>
 noremap <F2> :CtrlPBuffer<cr>
 inoremap <F2> <C-o>:CtrlPBuffer<cr>
+
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " Clipboard
 " nnoremap <C-F3>   "+yy
@@ -237,4 +254,30 @@ function! ToggleFocusMode()
     VimroomToggle
 endfunc
 nnoremap <F3> :call ToggleFocusMode()<cr>
+
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_type_javascript = {
+    \ 'ctagsbin' : '/home/alk/doctorjs/bin/jsctags.js'
+    \ }
+
+function! MyFoldText() " {{{
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+" expand tabs into spaces
+    let onetab = strpart(' ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+endfunction " }}}
+set foldtext=MyFoldText()
+
+vnoremap p pgvy
 

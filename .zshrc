@@ -6,6 +6,7 @@ case $TERM in rxvt*) TERM=rxvt esac  # urxvt only, TERM value is not recognized
 
 autoload colors; colors  # so we can use $fg / $bg
 source /etc/profile  # autojump support
+source /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
 
 # Environment
 # ===========
@@ -169,6 +170,7 @@ alias mv='mv -i'
 # End of line aliases
 alias -g P='|less'  # paginate
 alias -g S='&>/dev/null'  # silent
+alias -g CW='--color-words -w -b'
 
 # Open files based on their extension
 alias -s png=xv
@@ -197,6 +199,7 @@ setopt no_clobber  # disallow > redirections to an existing file
 setopt hash_cmds hash_dirs  # command list cache
 
 setopt no_bg_nice  # do not nice bg processes
+
 
 # xterm title
 case $TERM in
