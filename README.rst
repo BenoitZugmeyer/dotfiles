@@ -22,7 +22,3 @@ Run  ``./deploy.bash``. It is pretty safe:
 
 If you want to use the awesome gmail widget, you should copy and edit the
 .netrc file.
-
-If you want to use the i3lock screen, you should copy the
-``.config/awesome/i3lock`` (after a ``git submodule update --init``) and run
-``make`` inside it. This should change soon.

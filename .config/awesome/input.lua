@@ -86,7 +86,7 @@ globalkeys = awful.util.table.join(
     awful.key({}, '#180', spawn('firefox-nightly')),
     awful.key({}, '#163', spawn('thunderbird')),
     awful.key({}, '#225', spawn('dolphin')),
-    awful.key({ modkey }, 'F12', spawn(config.config_path .. '/bin/i3lock -i ' .. config.wallpaper_path))
+    awful.key({ modkey }, 'F12', spawn('i3lock -i ' .. config.wallpaper_path))
 )
 
 clientkeys = awful.util.table.join(
