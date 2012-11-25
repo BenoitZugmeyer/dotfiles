@@ -1,5 +1,5 @@
 #!/bin/sh
 
 sudo pacman -Syu
-echo 'packages.rel.update()' | awesome-client
+echo 'mywidgets.pacman.update()' | awesome-client
 read

@@ -5,26 +5,29 @@
 
 -- Alternative icon sets and widget icons:
 --  * http://awesome.naquadah.org/wiki/Nice_Icons
-local root = config.config_path .. '/theme'
+
+local root = confpath .. "/theme"
+
 -- {{{ Main
 theme = {}
-theme.wallpaper_cmd = { "feh --bg-tile /home/alk/.config/awesome/wallpaper" }
+theme.wallpaper = confpath .. "/wallpaper"
 -- }}}
 
 -- {{{ Styles
 theme.font      = "sans 8"
 
 -- {{{ Colors
-theme.fg_normal = "#DCDCCC"
-theme.fg_focus  = "#F0DFAF"
-theme.fg_urgent = "#CC9393"
-theme.bg_normal = "#3F3F3F"
-theme.bg_focus  = "#1E2320"
-theme.bg_urgent = "#3F3F3F"
+theme.fg_normal  = "#DCDCCC"
+theme.fg_focus   = "#F0DFAF"
+theme.fg_urgent  = "#CC9393"
+theme.bg_normal  = "#3F3F3F"
+theme.bg_focus   = "#1E2320"
+theme.bg_urgent  = "#3F3F3F"
+theme.bg_systray = theme.bg_normal
 -- }}}
 
 -- {{{ Borders
-theme.border_width  = "1"
+theme.border_width  = 1
 theme.border_normal = "#3F3F3F"
 theme.border_focus  = "#999999"
 theme.border_marked = "#CC9393"
@@ -65,20 +68,20 @@ theme.mouse_finder_color = "#CC9393"
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_height = "15"
-theme.menu_width  = "100"
+theme.menu_height = 15
+theme.menu_width  = 100
 -- }}}
 
 -- {{{ Icons
 -- {{{ Taglist
-theme.taglist_squares_sel   = root .. "/taglist/sel.png"
-theme.taglist_squares_unsel = root .. "/taglist/unsel.png"
+theme.taglist_squares_sel   = root .. "/taglist/squarefz.png"
+theme.taglist_squares_unsel = root .. "/taglist/squarez.png"
+--theme.taglist_squares_resize = "false"
 -- }}}
 
 -- {{{ Misc
-theme.awesome_icon           = root .. "/awesome.png"
+theme.awesome_icon           = root .. "/icons/awesome.png"
 theme.menu_submenu_icon      = "/usr/share/awesome/themes/default/submenu.png"
-theme.tasklist_floating_icon = "/usr/share/awesome/themes/default/tasklist/floatingw.png"
 -- }}}
 
 -- {{{ Layout
