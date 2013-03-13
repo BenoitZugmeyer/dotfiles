@@ -172,6 +172,16 @@ do
     volume.increase = function() volume_do("5%+") end
     volume.decrease = function() volume_do("5%-") end
     volume.toggle = function() volume_do("toggle") end
+    volume.muted = function()
+        return not io.popen('amixer get Master'):read('*a'):match('%[on%]')
+    end
+    volume.mute = function(y)
+        if y or y == nil then
+            volume_do('mute')
+        else
+            volume_do('unmute')
+        end
+    end
 end
 -- }}}
 
@@ -474,8 +484,11 @@ globalkeys = awful.util.table.join(
     awful.key({}, '#163', spawn('thunderbird')),
     awful.key({}, '#225', spawn('dolphin')),
     awful.key({ modkey }, 'F12', function ()
+        local muted = volume.muted()
+        volume.mute()
         awful.util.spawn('mpc pause')
-        awful.util.spawn('i3lock -i ' .. beautiful.wallpaper)
+        awful.util.pread('i3lock -n -i ' .. beautiful.wallpaper)
+        volume.mute(muted)
     end)
 )
 
