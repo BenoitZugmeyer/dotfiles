@@ -1,18 +1,18 @@
 
-[[ `who am i` != *\) ]] && is_local=yes
+[[ -z "$SSH_CONNECTION" ]] && is_local=yes
 
-case $TERM in rxvt*) TERM=rxvt esac  # urxvt only, TERM value is not recognized
-                                     # when logging on ssh servers
+[[ $TERM = rxvt* ]] && TERM=rxvt  # urxvt only, TERM value is not recognized
+                                  # when logging on ssh servers
 
 autoload colors; colors  # so we can use $fg / $bg
 source /etc/profile  # autojump support
-source /usr/share/zsh/plugins/zsh-syntax-highlight/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Environment
 # ===========
 
 export EDITOR=vim
-export PATH=$PATH:~/bin
+export PATH=$PATH:~/bin:~/.gem/ruby/1.9.1/bin
 export PAGER=less
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
@@ -148,15 +148,16 @@ prompt alk  # load our prompt
 
 # Aliases
 # =======
+has-command () {
+    which $1 &> /dev/null
+    return $?
+}
 
 eval `dircolors -b`  # nice colors with ls
 alias ls="ls --color=auto"
+alias l="ls --color=auto --ignore='*.pyc'"
 alias vi=vim
 alias v=vim
-alias pacman=pacman-color  # install pacman-color from archlinux.fr repo.
-                           # To enable autocompletion, edit
-                           # /usr/share/zsh/site-functions/_pacman and add
-                           # pacman-color to the very first line (#compdef)
 alias less='less -R'
 alias k=kate
 alias diffdists='ls *-dist -1 | sed "s/-dist//" | while read file; do echo "DIFF $file"; diff $file-dist $file; done'
@@ -171,12 +172,16 @@ alias mv='mv -i'
 alias -g P='|less'  # paginate
 alias -g S='&>/dev/null'  # silent
 alias -g CW='--color-words -w -b'
+alias -g L='|& less -S'
 
 # Open files based on their extension
 alias -s png=xv
 alias -s jpg=xv
 alias -s jpeg=xv
 
+if has-command ls++; then
+    alias ll=ls++
+fi
 
 
 # Other stuffs
@@ -316,3 +321,7 @@ function prompt_git_info() {
         [[ $untracked -gt 0 ]] && printf "$__GIT_UNTRACKED"
     fi
 }
+
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^X^e' edit-command-line
