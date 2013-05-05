@@ -31,6 +31,7 @@ hi StatusLine	ctermfg=230		ctermbg=234		cterm=none		guifg=#ffffd7	guibg=#444444	
 hi VertSplit	ctermfg=234		ctermbg=234		cterm=none		guifg=#444444	guibg=#444444	gui=none
 hi StatusLineNC	ctermfg=241		ctermbg=234		cterm=none		guifg=#857b6f	guibg=#444444	gui=none
 hi LineNr		ctermfg=236		ctermbg=232		cterm=none		guifg=#857b6f	guibg=#080808	gui=none
+hi SignColumn	ctermfg=232		ctermbg=233		cterm=none		guifg=#e3e0d7	guibg=#242424	gui=none
 hi SpecialKey	ctermfg=241						cterm=none		guifg=#626262	guibg=#2b2b2b	gui=none
 hi WarningMsg	ctermfg=203										guifg=#ff5f55
 hi ErrorMsg		ctermfg=196		ctermbg=236		cterm=bold		guifg=#ff2026	guibg=#3a3a3a	gui=bold
@@ -60,7 +61,6 @@ hi ColorColumn ctermbg=232 guibg=#2d2d2d
 "hi PmenuThumb
 "hi Question
 "hi Scrollbar
-"hi SignColumn
 "hi SpellBad
 "hi SpellCap
 "hi SpellLocal
