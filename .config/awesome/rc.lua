@@ -243,8 +243,11 @@ mywidgets.mail = createwidget{
     icon = 'mail.png',
     format = function (widget, args)
         local result = args["{count}"]
+        function decode(l)
+            return string.gsub(l,"&amp;", '&')
+        end
         if args["{subject}"] ~= "N/A" and args["{count}"] ~= 0 then
-            result = result .. ' ' .. args["{subject}"]
+            result = result .. ' ' .. decode(args["{subject}"])
         end
         return result
     end,
