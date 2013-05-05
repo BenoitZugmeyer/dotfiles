@@ -228,7 +228,7 @@ nnoremap <C-s> :call SynStack()<CR>
 
 " Focus on current scope
 nnoremap <leader>z zMzvzczOzz
-nnoremap <Space> zMzvzczOzz
+nnoremap <Space> za
 
 " dvorak specific
 noremap ; :
