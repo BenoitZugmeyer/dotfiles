@@ -27,7 +27,7 @@
     warnAmbiguousRefs = false
 
 [alias]
-    st = status
+    st = status -sb
     ci = commit
     br = branch
     co = checkout
@@ -54,3 +54,7 @@
 
 [merge]
     conflictstyle = diff3
+[push]
+	default = simple
+[help]
+	autocorrect = 1
