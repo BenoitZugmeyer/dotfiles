@@ -3,7 +3,6 @@ local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
-
 -- Widget and layout library
 local wibox = require("wibox")
 -- Theme handling library
@@ -139,20 +138,19 @@ function systemctl (what)
     return 'sudo systemctl ' .. what
 end
 
-mymainmenu = awful.menu({
-    items = {
-        { "awesome", {
-            { "manual", terminal .. " -e man awesome" },
-            --{ "edit config", config.editor_cmd .. " -c 'cd " .. config.config_path .. "' " .. config.config_path .. "/rc.lua" },
-            { "edit config", editor_cmd .. " " .. awesome.conffile },
-            { "restart", awesome.restart },
-            { "quit", awesome.quit }
-        }, beautiful.awesome_icon },
-        { "Suspend", systemctl('suspend') },
-        { "Restart", systemctl('reboot') },
-        { "Stop", systemctl('poweroff') },
-    }
-})
+myawesomemenu = {
+   { "manual", terminal .. " -e man awesome" },
+   { "edit config", editor_cmd .. " " .. awesome.conffile },
+   { "restart", awesome.restart },
+   { "quit", awesome.quit }
+}
+
+mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                    { "Suspend", systemctl('suspend') },
+                                    { "Restart", systemctl('reboot') },
+                                    { "Stop", systemctl('poweroff') },
+                                  }
+                        })
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
