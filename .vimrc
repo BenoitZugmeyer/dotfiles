@@ -251,6 +251,7 @@ let g:vimroom_width = &colorcolumn - 1
 function! ToggleFocusMode()
     set noruler
     set nolist
+    call DisableGitGutter()
     VimroomToggle
 endfunc
 nnoremap <F3> :call ToggleFocusMode()<cr>

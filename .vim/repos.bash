@@ -114,6 +114,8 @@ repo vimroom            https://github.com/mikewest/vimroom.git
 repo vimwiki            https://github.com/vim-scripts/vimwiki.git
 repo syntastic          https://github.com/scrooloose/syntastic.git
 repo tagbar             https://github.com/majutsushi/tagbar.git
+repo pep8-indent        https://github.com/hynek/vim-python-pep8-indent.git
+repo gitgutter          https://github.com/airblade/vim-gitgutter.git
 
 repo snipmate           https://github.com/garbas/vim-snipmate.git # forked version
 repo tlib               https://github.com/tomtom/tlib_vim.git
@@ -135,6 +137,8 @@ sym vimroom
 sym vimwiki
 sym syntastic
 sym tagbar
+sym pep8-indent
+sym gitgutter
 
 sym snipmate
 sym addon-mw-utils
