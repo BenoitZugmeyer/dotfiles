@@ -114,13 +114,13 @@ repo vimroom            https://github.com/mikewest/vimroom.git
 repo vimwiki            https://github.com/vim-scripts/vimwiki.git
 repo syntastic          https://github.com/scrooloose/syntastic.git
 repo tagbar             https://github.com/majutsushi/tagbar.git
+repo jinja              https://github.com/atourino/jinja.vim.git
+repo html5              https://github.com/othree/html5-syntax.vim.git
 repo pep8-indent        https://github.com/hynek/vim-python-pep8-indent.git
 repo gitgutter          https://github.com/airblade/vim-gitgutter.git
 
-repo snipmate           https://github.com/garbas/vim-snipmate.git # forked version
-repo tlib               https://github.com/tomtom/tlib_vim.git
-repo addon-mw-utils     https://github.com/MarcWeber/vim-addon-mw-utils.git
-repo snipmate-snippets  https://github.com/honza/snipmate-snippets.git
+repo ultisnip           https://github.com/SirVer/ultisnips.git
+#repo snipmate-snippets  https://github.com/honza/snipmate-snippets.git
 
 
 sym pathogen/autoload/pathogen.vim autoload
@@ -137,13 +137,13 @@ sym vimroom
 sym vimwiki
 sym syntastic
 sym tagbar
+sym jinja
+sym html5
 sym pep8-indent
 sym gitgutter
 
-sym snipmate
-sym addon-mw-utils
-sym tlib
-sym snipmate-snippets
+sym ultisnip
+#sym snipmate-snippets
 
 register "tmp/*"
 register repos.bash
