@@ -34,9 +34,10 @@
     cp = cherry-pick
     df = diff
     dfc = diff --cached
-    lg = log -p
+    lg = log -p -C -D
     lol = log --graph --decorate --oneline
     lola = log --graph --decorate --oneline --all
+    lolf = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
     ls = ls-files
     rb = pull --rebase
     svnid = !git --no-pager log --all --pretty=format:\"%H %s\" --grep
@@ -58,3 +59,5 @@
 	default = simple
 [help]
 	autocorrect = 1
+[diff]
+	algorithm = patience
