@@ -303,6 +303,16 @@ mywidgets.volume = createwidget{
     }
 }
 
+mywidgets.battery = createwidget{
+    type = vicious.widgets.bat,
+    arg = 'BAT0',
+    icon = 'bat.png',
+    format = function(widget, args)
+        return args[1] .. args[2] .. '%'
+    end,
+    timer = 60
+}
+
 -- Create a wibox for each screen and add it
 mywibox = {}
 mypromptbox = {}
@@ -383,6 +393,7 @@ for s = 1, screen.count() do
     mywidgets.weather.add(right_layout)
     mywidgets.pacman.add(right_layout)
     mywidgets.mail.add(right_layout)
+    mywidgets.battery.add(right_layout)
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(spacer)
     mywidgets.clock.add(right_layout)
