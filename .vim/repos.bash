@@ -23,7 +23,7 @@ register () {
 }
 
 checkout () {
-    current=$(rgit status --porcelain -b | grep -Po '## \K[^ ]*')
+    current=$(rgit name-rev --name-only HEAD)
     if [[ $current != $1 ]]; then
         rgit checkout $1
     fi
