@@ -277,6 +277,8 @@ nnoremap <C-s> :call SynStack()<CR>
 nnoremap <leader>z zMzvzczOzz
 nnoremap <Space> za
 
+nnoremap <leader>cd :cd %:p:h<cr>
+
 " dvorak specific
 noremap ; :
 
