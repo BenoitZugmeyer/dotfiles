@@ -118,6 +118,9 @@ repo jinja              https://github.com/atourino/jinja.vim.git
 repo html5              https://github.com/othree/html5-syntax.vim.git
 repo pep8-indent        https://github.com/hynek/vim-python-pep8-indent.git
 repo gitgutter          https://github.com/airblade/vim-gitgutter.git
+repo vdebug             https://github.com/joonty/vdebug.git
+repo tern               https://github.com/marijnh/tern_for_vim.git
+repo less               https://github.com/groenewege/vim-less
 
 repo ultisnip           https://github.com/SirVer/ultisnips.git
 #repo snipmate-snippets  https://github.com/honza/snipmate-snippets.git
@@ -141,6 +144,9 @@ sym jinja
 sym html5
 sym pep8-indent
 sym gitgutter
+sym vdebug
+sym tern
+sym less
 
 sym ultisnip
 #sym snipmate-snippets
