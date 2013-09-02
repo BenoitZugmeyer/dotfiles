@@ -162,6 +162,7 @@ alias less='less -R'
 alias k=kate
 alias diffdists='ls *-dist -1 | sed "s/-dist//" | while read file; do echo "DIFF $file"; diff $file-dist $file; done'
 alias psg='ps aux | grep -v grep | grep'
+alias scu='systemctl --user'
 
 # Confirm file deletion / overright
 alias cp='cp -i'
