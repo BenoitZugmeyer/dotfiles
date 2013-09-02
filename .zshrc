@@ -12,7 +12,7 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # ===========
 
 export EDITOR=vim
-export PATH=$PATH:~/bin:~/.gem/ruby/1.9.1/bin
+export PATH=$PATH:~/bin:~/.gem/ruby/2.0.0/bin
 export PAGER=less
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
