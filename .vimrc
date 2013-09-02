@@ -1,10 +1,55 @@
 
-call pathogen#infect()
-set nocompatible              " Don't be compatible with vi
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+" Syntax, indent...
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'tpope/vim-git'
+Bundle 'othree/html5-syntax.vim'
+Bundle 'pangloss/vim-javascript'
+Bundle 'atourino/jinja.vim'
+Bundle 'groenewege/vim-less'
+Bundle 'hynek/vim-python-pep8-indent'
+Bundle 'mozilla/rust', {'rtp': 'rust/src/etc/vim'}
+
+" Edition helper
+Bundle 'tsaleh/vim-align'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'tpope/vim-surround'
+Bundle 'marijnh/tern_for_vim'
+Bundle 'SirVer/ultisnips'
+
+" Other
+Bundle 'kien/ctrlp.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'slack/vim-l9'
+Bundle 'scrooloose/syntastic'
+Bundle 'majutsushi/tagbar'
+Bundle 'mikewest/vimroom'
+Bundle 'joonty/vdebug'
+Bundle 'vim-scripts/vimwiki'
+
+" Unused, but to keep in mind
+" Bundle 'altercation/vim-colors-solarized'
+" Bundle 'hallettj/jslint.vim'
+" Bundle 'mileszs/ack.vim'
+" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Bundle 'sjl/gundo.vim'
+" Bundle 'tpope/vim-pathogen'
+" Bundle 'tpope/vim-vividchalk'
+" Bundle 'vim-scripts/pep8'
+
+
+filetype plugin indent on     " required!
+
 
 syntax on                     " syntax highlighing
-filetype on                   " try to detect filetypes
-filetype plugin indent on     " enable loading indent file for filetype
 set omnifunc=syntaxcomplete#Complete
 set number                    " Display line numbers
 set numberwidth=1             " using only 1 column (and 1 space) while possible
@@ -282,3 +327,9 @@ set foldtext=MyFoldText()
 
 vnoremap p pgvy
 
+au! BufNewFile,BufRead *.jinja  setl ft=htmljinja
+au! BufNewFile,BufRead *.coffee setl sw=2 sts=2 ts=2 et
+au! BufNewFile,BufRead *.html   setl sw=2 sts=2 ts=2 et
+au! BufNewFile,BufRead *.js     setl sw=2 sts=2 ts=2 et cc=100
+au! BufNewFile,BufRead /home/alk/Prog/uwa/projects/packager/*
+\                               setl sw=4 sts=4 ts=4 et
