@@ -145,6 +145,8 @@ let g:ctrlp_prompt_mappings = {
 let g:ctrlp_max_files = 0
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files']
 let g:ctrlp_mruf_max = 10000
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_cache_dir = $HOME.'/.vim/cache_ctrlp'
 
 " Restore cursor position on opening a file
 function! ResCur()
