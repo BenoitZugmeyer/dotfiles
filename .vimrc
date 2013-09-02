@@ -124,7 +124,7 @@ set list
 """ Searching and Patterns
 set ignorecase              " Default to using case insensitive searches,
 set smartcase               " unless uppercase letters are used in the regex.
-set smarttab                " Handle tabs more intelligently 
+set smarttab                " Handle tabs more intelligently
 set hlsearch                " Highlight searches by default.
 set incsearch               " Incrementally search while typing a /regex
 
@@ -328,6 +328,9 @@ endfunction " }}}
 set foldtext=MyFoldText()
 
 vnoremap p pgvy
+
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 au! BufNewFile,BufRead *.jinja  setl ft=htmljinja
 au! BufNewFile,BufRead *.coffee setl sw=2 sts=2 ts=2 et
