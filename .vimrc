@@ -19,7 +19,9 @@ Bundle 'mozilla/rust', {'rtp': 'rust/src/etc/vim'}
 
 " Edition helper
 Bundle 'tsaleh/vim-align'
+Bundle 'tpope/vim-commentary'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'marijnh/tern_for_vim'
 Bundle 'SirVer/ultisnips'
