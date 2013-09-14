@@ -1,0 +1,9 @@
+[Unit]
+Description=Firefox-nightly
+
+[Service]
+ExecStart=/usr/bin/firefox-nightly
+Restart=always
+
+[Install]
+WantedBy=home.target

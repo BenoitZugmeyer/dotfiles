@@ -1,0 +1,9 @@
+[Unit]
+Description=ncmpcpp
+
+[Service]
+ExecStart=/usr/bin/konsole --nofork -e ncmpcpp
+Restart=always
+
+[Install]
+WantedBy=home.target

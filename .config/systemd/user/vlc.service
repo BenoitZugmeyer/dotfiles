@@ -1,0 +1,11 @@
+[Unit]
+Description=VideoOnLAN Service
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/cvlc --intf=lua --lua-intf=http --daemon --http-port 8090
+Restart=on-abort
+
+[Install]
+WantedBy=home.target

@@ -1,0 +1,9 @@
+[Unit]
+Description=Hotot-GTK3
+After=xorg.target
+
+[Service]
+ExecStart=/usr/bin/hotot-gtk3
+
+[Install]
+WantedBy=home.target
