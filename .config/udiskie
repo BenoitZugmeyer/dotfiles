@@ -1,0 +1,9 @@
+program_options:
+    udisks_version: 1
+    tray: auto
+    notify: true
+    file_manager: xdg-open
+
+mount_options:
+- id_type: ntfs
+  options: uid=1000,umask=022
