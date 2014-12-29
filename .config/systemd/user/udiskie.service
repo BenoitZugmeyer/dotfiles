@@ -1,0 +1,9 @@
+[Unit]
+Description=devmon Service
+
+[Service]
+ExecStart=/usr/bin/udiskie -c /home/alk/.config/udiskie
+
+[Install]
+WantedBy=home.target
+

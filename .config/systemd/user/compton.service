@@ -1,0 +1,10 @@
+[Unit]
+Description=Compton X11 compositor
+Documentation=man:compton(1)
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/compton -b
+
+[Install]
+WantedBy=home.target

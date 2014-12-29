@@ -1,0 +1,11 @@
+[Unit]
+Description=xrandr
+Requires=xorg@0.socket
+
+[Service]
+ExecStart=/usr/bin/xrandr --output HDMI1 --auto --output LVDS1 --auto --pos 1920x400
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=home.target

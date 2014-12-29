@@ -1,8 +1,8 @@
 [Unit]
-Description=Firefox-nightly
+Description=Firefox
 
 [Service]
-ExecStart=/usr/bin/firefox-nightly
+ExecStart=/usr/bin/firefox
 Restart=always
 
 [Install]

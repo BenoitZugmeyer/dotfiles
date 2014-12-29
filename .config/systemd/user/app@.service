@@ -1,0 +1,11 @@
+[Unit]
+Description=Application "%i"
+IgnoreOnIsolate=yes
+After=home.target
+
+[Service]
+ExecStart=/usr/bin/env %i
+KillMode=process
+
+[Install]
+WantedBy=home.target

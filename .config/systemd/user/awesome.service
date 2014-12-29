@@ -1,15 +1,14 @@
 [Unit]
 Description=Awesome WM
 Before=home.target
-After=xorg.target
-Requires=dbus.socket
+After=xrandr.service
+Requires=xorg@0.socket
 
 [Service]
 Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin
-Environment=SHELL=/bin/zsh
 ExecStart=/usr/bin/awesome
 Restart=always
 RestartSec=10
 
 [Install]
-WantedBy=wm.target
+WantedBy=home.target
