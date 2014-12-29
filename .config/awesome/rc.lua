@@ -13,6 +13,8 @@ local menubar = require("menubar")
 
 local vicious = require("vicious")
 
+local lain = require("lain")
+
 -- {{{ Error handling
 -- Handle runtime errors after startup
 do
@@ -51,10 +53,13 @@ modkey = "Mod1"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
---  awful.layout.suit.floating,
+    lain.layout.uselesstile,
+    lain.layout.centerfair,
+
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
+    awful.layout.suit.floating,
 --  awful.layout.suit.tile.top,
     awful.layout.suit.fair,
 --  awful.layout.suit.fair.horizontal,
@@ -65,6 +70,11 @@ local layouts =
 --  awful.layout.suit.magnifier
 }
 
+lain.layout.centerfair.nmaster = 3
+lain.layout.centerfair.ncol = 2
+
+theme.useless_gap_width = 8
+theme.border_width = 2
 -- }}}
 
 -- {{{ Util
