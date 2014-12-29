@@ -596,7 +596,7 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "Konsole" },
       callback = function (c)
-        awful.client.swap.byidx(1, c)
+        awful.client.swap.byidx(awful.tag.getnmaster(), c)
       end },
     { rule = { class = "Dolphin" }, except = { role = "Dolphin" },
       callback = function (c) awful.client.floating.set(c, true) end },
