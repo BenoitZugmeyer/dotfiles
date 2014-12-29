@@ -10,12 +10,15 @@ Bundle 'gmarik/vundle'
 " Syntax, indent...
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-git'
-Bundle 'othree/html5-syntax.vim'
+Bundle 'othree/html5.vim'
 Bundle 'pangloss/vim-javascript'
-Bundle 'atourino/jinja.vim'
+Bundle 'mxw/vim-jsx'
+Bundle 'mitsuhiko/vim-jinja'
 Bundle 'groenewege/vim-less'
 Bundle 'hynek/vim-python-pep8-indent'
-Bundle 'mozilla/rust', {'rtp': 'rust/src/etc/vim'}
+Bundle 'mozilla/rust', {'rtp': 'src/etc/vim'}
+Bundle 'editorconfig/editorconfig-vim'
+Bundle 'octol/vim-cpp-enhanced-highlight'
 
 " Edition helper
 Bundle 'tsaleh/vim-align'
@@ -23,8 +26,10 @@ Bundle 'tpope/vim-commentary'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-Bundle 'marijnh/tern_for_vim'
 Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
+Bundle 'vis'
+Bundle 'chrisbra/unicode.vim'
 
 " Other
 Bundle 'kien/ctrlp.vim'
@@ -32,10 +37,15 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'slack/vim-l9'
 Bundle 'scrooloose/syntastic'
-Bundle 'majutsushi/tagbar'
 Bundle 'mikewest/vimroom'
 Bundle 'joonty/vdebug'
 Bundle 'vim-scripts/vimwiki'
+Bundle 'tpope/vim-vinegar'
+
+Bundle 'tacahiroy/ctrlp-funky'
+Bundle 'mattn/ctrlp-register'
+
+Bundle 'junegunn/vim-easy-align'
 
 " Unused, but to keep in mind
 " Bundle 'altercation/vim-colors-solarized'
@@ -52,6 +62,7 @@ filetype plugin indent on     " required!
 
 
 syntax on                     " syntax highlighing
+set synmaxcol=450
 set omnifunc=syntaxcomplete#Complete
 set number                    " Display line numbers
 set numberwidth=1             " using only 1 column (and 1 space) while possible
@@ -87,7 +98,7 @@ set wrap                  " don't wrap text
 set linebreak               " don't wrap textin the middle of a word
 set autoindent              " always set autoindenting on
 set smartindent             " use smart indent if there is no indent file
-set tabstop=4               " <tab> inserts 4 spaces 
+set tabstop=4               " <tab> inserts 4 spaces
 set shiftwidth=4            " but an indent level is 2 spaces wide.
 set softtabstop=4           " <BS> over an autoindent deletes both spaces.
 set expandtab               " Use spaces, not tabs, for autoindent/tab key.
@@ -118,9 +129,11 @@ set statusline=%<%{fugitive#statusline()}\ %F\ %M%R%H
 set statusline+=%#warningmsg#%{SyntasticStatuslineFlag()}%*
 set statusline+=%=%{&ff}%Y,%{&fenc}\ \|\ %l/%L:%v\ %P\ 
 set colorcolumn=100
+set textwidth=100
 
 " displays tabs with :set list & displays when a line runs off-screen
-set listchars=tab:⋮\ ,trail:•,precedes:<,extends:>
+"set listchars=tab:⋮\ ,trail:•,precedes:<,extends:>
+set listchars=tab:»\ ,trail:•,precedes:<,extends:>
 set list
 
 """ Searching and Patterns
@@ -134,8 +147,20 @@ set backupdir=~/.vim/tmp
 set directory=~/.vim/tmp
 
 set backupcopy=yes
+set clipboard=unnamedplus
+set formatoptions=croqlj
 
-let g:syntastic_auto_jump=1
+" Always use one window for netrw
+let g:netrw_chgwin=1
+
+" Syntastic
+let g:syntastic_always_populate_loc_list = 1
+
+let g:syntastic_javascript_checkers=["jsxhint"]
+let g:syntastic_javascript_jshint_args = "--extract auto"
+let g:syntastic_javascript_jsxhint_args = "--extract auto --harmony"
+
+let g:syntastic_auto_jump=0
 let g:syntastic_stl_format = 'Error line %F (%t)'
 
 let g:ctrlp_by_filename = 1
@@ -203,26 +228,6 @@ nnoremap <C-y> 3<C-y>
 inoremap # #
 
 
-"inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-
-" ACP related stuff. Deactivate for now.
-" Don't allow snipmate to take over tab
-"autocmd VimEnter * ino <c-j> <c-r>=TriggerSnippet()<cr>
-" Use tab to scroll through autocomplete menus
-"autocmd VimEnter * imap <expr> <Tab> pumvisible() ? "<C-N>" : "<Tab>"
-"autocmd VimEnter * imap <expr> <S-Tab> pumvisible() ? "<C-P>" : "<S-Tab>"
-"snor <c-j> <esc>i<right><c-r>=TriggerSnippet()<cr>
-"let g:acp_completeoptPreview=1
-" Select the item in the list with enter
-"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-
-let g:statusLineText=""
-noremap <F5> :bN<CR>
-noremap <F6> :bn<CR>
-inoremap <F5> <esc>:bN<cr>
-inoremap <F6> <esc>:bn<cr>
 
 " Smarter home key
 noremap <Home> ^
@@ -247,6 +252,11 @@ nnoremap <Leader>js ms
 nnoremap - ddp
 nnoremap _ ddkP
 
+" Select previously pasted text
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+" Select previously entered text
+nnoremap gV `[v`]
+
 " Open file
 noremap <F1> :CtrlPMixed<cr>
 inoremap <F1> <C-o>:CtrlPMixed<cr>
@@ -255,25 +265,9 @@ inoremap <F2> <C-o>:CtrlPBuffer<cr>
 
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
-" Clipboard
-" nnoremap <C-F3>   "+yy
-" vnoremap <C-F3>   "+y
-" noremap  <C-F4>   "+gp
-" inoremap <C-F3>   <c-o>"+yy
-" inoremap <C-F4>   <c-o>"+gp
-
-" Primary selection
-" nnoremap <F3> "*yy
-" vnoremap <F3> "*y
-" noremap  <F4> "*gp
-" inoremap <F3> <c-o>"*yy
-" inoremap <F4> <c-o>"*gp
-
-" Usefull for working on themes
-function! SynStack()
-    echo join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")'), " > ")
-endfunc
-nnoremap <C-s> :call SynStack()<CR>
+" Keep visual selection on indent
+vnoremap < <gv
+vnoremap > >gv
 
 " Focus on current scope
 nnoremap <leader>z zMzvzczOzz
@@ -292,8 +286,32 @@ nnoremap <silent><C-o>   :set paste<CR>m`o<Esc>``:set nopaste<CR>
 inoremap kk <Esc>
 noremap k :w<CR>
 
-" Surround comments with character /
-let g:surround_47 = "/* \r */"
+
+
+
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
+
+
+
+vnoremap p pgvy
+
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsDontReverseSearchPath=1
+
+autocmd! FileType css,scss setl iskeyword+=-
+
+" Use ranger r vim file manager
+function! Ranger()
+    silent !ranger --choosefile=/tmp/chosen %:p:h
+    if filereadable('/tmp/chosen')
+        exec 'edit ' . system('cat /tmp/chosen')
+        call system('rm /tmp/chosen')
+    endif
+    redraw!
+endfunction
+nmap <leader>o :call Ranger()<cr>
 
 
 
@@ -302,12 +320,11 @@ let g:vimroom_width = &colorcolumn - 1
 function! ToggleFocusMode()
     set noruler
     set nolist
-    call DisableGitGutter()
+    GitGutterToggle
     VimroomToggle
 endfunc
 nnoremap <F3> :call ToggleFocusMode()<cr>
 
-cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_javascript = {
@@ -330,15 +347,48 @@ function! MyFoldText() " {{{
     return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
+" Restore cursor position on opening a file
+function! ResCur()
+    if line("'\"") <= line("$")
+        normal! g`"
+        return 1
+    endif
+endfunction
 
-vnoremap p pgvy
+augroup resCur
+    autocmd!
+    autocmd BufWinEnter * call ResCur()
+augroup END
 
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-au! BufNewFile,BufRead *.jinja  setl ft=htmljinja
-au! BufNewFile,BufRead *.coffee setl sw=2 sts=2 ts=2 et
-au! BufNewFile,BufRead *.html   setl sw=2 sts=2 ts=2 et
-au! BufNewFile,BufRead *.js     setl sw=2 sts=2 ts=2 et cc=100
-au! BufNewFile,BufRead /home/alk/Prog/uwa/projects/packager/*
-\                               setl sw=4 sts=4 ts=4 et
+
+function! Reg()
+    reg
+    echo "Register: "
+    let char = nr2char(getchar())
+    if char != "\<Esc>"
+        execute "normal! \"".char."p"
+    endif
+    redraw
+endfunction
+
+command! -nargs=0 Reg call Reg()
+
+
+function! ExtractLocalVariable()
+    let name = input("Variable name: ")
+
+    if (visualmode() == "")
+        normal! viw
+    else
+        normal! gv
+    endif
+
+    exec "normal! c" . name
+    let selection = @"
+    exec "normal! Ovar " . name . " = "
+    exec "normal! pa;"
+    call feedkeys(':.+1,$s/\V\C' . escape(selection, '/\') . '/' . escape(name, '/\') . "/gec\<cr>")
+endfunction
+
+vnoremap r :call ExtractLocalVariable()<CR>
