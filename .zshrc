@@ -279,18 +279,25 @@ __GIT_CLEAN='✔'
 __GIT_UNMERGED='✖'
 __GIT_SHA1=':'
 
+function prompt_git_info_mode() {
+    if [[ -e $(git rev-parse --git-dir)/$2 ]]; then
+        printf "($1)"
+    fi
+}
+
 function prompt_git_info() {
-    staged=0
-    unmerged=0
-    changed=0
-    untracked=0
-    branch=""
-    remote=""
+    local staged=0
+    local unmerged=0
+    local changed=0
+    local untracked=0
+    local branch=""
+    local remote=""
+
     while IFS="" read -r line; do
         if [[ $line = (## *) ]]; then
             if [[ $line =~ '^## (([^.\[(]|\.[^.\[(])+)[^\[(]*(\[.*?\])?$' ]]; then
                 branch=$match[1]
-                d=$match[3]
+                local d=$match[3]
                 [[ $d =~ 'behind ([0-9]+)' ]] &&
                     remote="$remote$__GIT_BEHIND$match[1]"
                 [[ $d =~ 'ahead ([0-9]+)'  ]] &&
@@ -322,6 +329,11 @@ function prompt_git_info() {
             printf "%%{${fg[red]}%%}$__GIT_UNMERGED%d%%{$reset_color%%}" $unmerged
         [[ $untracked -gt 0 ]] && printf "$__GIT_UNTRACKED"
     fi
+
+    prompt_git_info_mode cherry-pick sequencer/todo
+    prompt_git_info_mode rebase      rebase-merge/git-rebase-todo
+    prompt_git_info_mode merge       MERGE_HEAD
+    prompt_git_info_mode bisect      BISECT_START
 }
 
 autoload -U edit-command-line
