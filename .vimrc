@@ -21,7 +21,6 @@ Bundle 'editorconfig/editorconfig-vim'
 Bundle 'octol/vim-cpp-enhanced-highlight'
 
 " Edition helper
-Bundle 'tsaleh/vim-align'
 Bundle 'tpope/vim-commentary'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-repeat'
@@ -32,7 +31,6 @@ Bundle 'vis'
 Bundle 'chrisbra/unicode.vim'
 
 " Other
-Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'slack/vim-l9'
@@ -42,10 +40,12 @@ Bundle 'joonty/vdebug'
 Bundle 'vim-scripts/vimwiki'
 Bundle 'tpope/vim-vinegar'
 
-Bundle 'tacahiroy/ctrlp-funky'
-Bundle 'mattn/ctrlp-register'
-
 Bundle 'junegunn/vim-easy-align'
+Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/neomru.vim'
+Plugin 'lambdalisue/unite-grep-vcs'
+Bundle 'Shougo/unite-outline'
+
 
 " Unused, but to keep in mind
 " Bundle 'altercation/vim-colors-solarized'
@@ -163,18 +163,6 @@ let g:syntastic_javascript_jsxhint_args = "--extract auto --harmony"
 let g:syntastic_auto_jump=0
 let g:syntastic_stl_format = 'Error line %F (%t)'
 
-let g:ctrlp_by_filename = 1
-let g:ctrlp_max_height = 20
-let g:ctrlp_prompt_mappings = {
-  \ 'PrtBS()':      ['<bs>', '<c-]>', '<c-h>'],
-  \ 'PrtCurLeft()': ['<left>', '<c-^>'],
-  \ }
-let g:ctrlp_max_files = 0
-let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files']
-let g:ctrlp_mruf_max = 10000
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_cache_dir = $HOME.'/.vim/cache_ctrlp'
-
 " Restore cursor position on opening a file
 function! ResCur()
     if line("'\"") <= line("$")
@@ -209,13 +197,9 @@ nnoremap <leader>. :lcd %:p:h<CR>
 cnoremap W! w !sudo tee % >/dev/null
 
 " ctrl-jklm  changes to that split
-noremap <c-j> <c-w>j
-noremap <c-k> <c-w>k
-noremap <c-l> <c-w>l
-noremap <c-h> <c-w>h
-noremap <c-left> <c-w>h
-noremap <c-down> <c-w>j
-noremap <c-up> <c-w>k
+noremap <c-left>  <c-w>h
+noremap <c-down>  <c-w>j
+noremap <c-up>    <c-w>k
 noremap <c-right> <c-w>l
 " and lets make these all work in insert mode too ( <C-O> makes next cmd
 "  happen as if in command mode )
@@ -257,11 +241,23 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " Select previously entered text
 nnoremap gV `[v`]
 
-" Open file
-noremap <F1> :CtrlPMixed<cr>
-inoremap <F1> <C-o>:CtrlPMixed<cr>
-noremap <F2> :CtrlPBuffer<cr>
-inoremap <F2> <C-o>:CtrlPBuffer<cr>
+" Unite
+let g:unite_source_history_yank_enable = 1
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_selecta'])
+nnoremap <F1> :<C-u>Unite -start-insert file_rec/git<cr>
+inoremap <F1> :<C-u>Unite -start-insert file_rec/git<cr>
+nnoremap <F2> :<C-u>Unite -start-insert buffer<cr>
+inoremap <F2> :<C-u>Unite -start-insert buffer<cr>
+nnoremap <C-o> :<C-u>Unite -start-insert file_rec/git<cr>
+nnoremap <C-b> :<C-u>Unite -start-insert buffer<cr>
+nnoremap <C-l> :<C-u>Unite -start-insert line:buffers<cr>
+nnoremap <C-e> :<C-u>Unite -start-insert history/yank<cr>
+nnoremap <C-m> :<C-u>Unite -start-insert file_mru<cr>
+
+" function! s:UniteSettings()
+" endfunction
+" au FileType unite call s:UniteSettings()
 
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
@@ -280,7 +276,7 @@ noremap ; :
 
 "nnoremap <silent><C-o> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 "nnoremap <silent><C-S-o> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-nnoremap <silent><C-o>   :set paste<CR>m`o<Esc>``:set nopaste<CR>
+"nnoremap <silent><C-o>   :set paste<CR>m`o<Esc>``:set nopaste<CR>
 "nnoremap <silent><C-O> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 inoremap kk <Esc>
@@ -323,10 +319,8 @@ function! ToggleFocusMode()
     GitGutterToggle
     VimroomToggle
 endfunc
-nnoremap <F3> :call ToggleFocusMode()<cr>
+nnoremap <F4> :call ToggleFocusMode()<cr>
 
-
-nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_javascript = {
     \ 'ctagsbin' : '/home/alk/doctorjs/bin/jsctags.js'
     \ }
@@ -359,20 +353,6 @@ augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
 augroup END
-
-
-
-function! Reg()
-    reg
-    echo "Register: "
-    let char = nr2char(getchar())
-    if char != "\<Esc>"
-        execute "normal! \"".char."p"
-    endif
-    redraw
-endfunction
-
-command! -nargs=0 Reg call Reg()
 
 
 function! ExtractLocalVariable()
