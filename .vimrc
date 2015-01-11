@@ -249,11 +249,15 @@ nnoremap <F1> :<C-u>Unite -start-insert file_rec/git<cr>
 inoremap <F1> :<C-u>Unite -start-insert file_rec/git<cr>
 nnoremap <F2> :<C-u>Unite -start-insert buffer<cr>
 inoremap <F2> :<C-u>Unite -start-insert buffer<cr>
+
 nnoremap <C-o> :<C-u>Unite -start-insert file_rec/git<cr>
 nnoremap <C-b> :<C-u>Unite -start-insert buffer<cr>
 nnoremap <C-l> :<C-u>Unite -start-insert line:buffers<cr>
+vnoremap <C-l> :<C-u>UniteWithCursorWord -start-insert line:buffers<cr>
 nnoremap <C-e> :<C-u>Unite -start-insert history/yank<cr>
 nnoremap <C-m> :<C-u>Unite -start-insert file_mru<cr>
+nnoremap <C-g> :<C-u>Unite -start-insert grep/git:/<cr>
+vnoremap <C-g> :<C-u>UniteWithCursorWord -start-insert grep/git:/<cr>
 
 " function! s:UniteSettings()
 " endfunction
