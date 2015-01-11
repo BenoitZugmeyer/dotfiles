@@ -5,57 +5,57 @@ filetype off                   " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " Syntax, indent...
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'tpope/vim-git'
-Bundle 'othree/html5.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'mxw/vim-jsx'
-Bundle 'mitsuhiko/vim-jinja'
-Bundle 'groenewege/vim-less'
-Bundle 'hynek/vim-python-pep8-indent'
-Bundle 'mozilla/rust', {'rtp': 'src/etc/vim'}
-Bundle 'editorconfig/editorconfig-vim'
-Bundle 'octol/vim-cpp-enhanced-highlight'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'tpope/vim-git'
+Plugin 'othree/html5.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'mitsuhiko/vim-jinja'
+Plugin 'groenewege/vim-less'
+Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'mozilla/rust', {'rtp': 'src/etc/vim'}
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " Edition helper
-Bundle 'tpope/vim-commentary'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
-Bundle 'vis'
-Bundle 'chrisbra/unicode.vim'
+Plugin 'tpope/vim-commentary'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'vis'
+Plugin 'chrisbra/unicode.vim'
 
 " Other
-Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'slack/vim-l9'
-Bundle 'scrooloose/syntastic'
-Bundle 'mikewest/vimroom'
-Bundle 'joonty/vdebug'
-Bundle 'vim-scripts/vimwiki'
-Bundle 'tpope/vim-vinegar'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'slack/vim-l9'
+Plugin 'scrooloose/syntastic'
+Plugin 'mikewest/vimroom'
+Plugin 'joonty/vdebug'
+Plugin 'vim-scripts/vimwiki'
+Plugin 'tpope/vim-vinegar'
 
-Bundle 'junegunn/vim-easy-align'
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/neomru.vim'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/neomru.vim'
 Plugin 'lambdalisue/unite-grep-vcs'
-Bundle 'Shougo/unite-outline'
+Plugin 'Shougo/unite-outline'
 
 
 " Unused, but to keep in mind
-" Bundle 'altercation/vim-colors-solarized'
-" Bundle 'hallettj/jslint.vim'
-" Bundle 'mileszs/ack.vim'
-" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Bundle 'sjl/gundo.vim'
-" Bundle 'tpope/vim-pathogen'
-" Bundle 'tpope/vim-vividchalk'
-" Bundle 'vim-scripts/pep8'
+" Plugin 'altercation/vim-colors-solarized'
+" Plugin 'hallettj/jslint.vim'
+" Plugin 'mileszs/ack.vim'
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Plugin 'sjl/gundo.vim'
+" Plugin 'tpope/vim-pathogen'
+" Plugin 'tpope/vim-vividchalk'
+" Plugin 'vim-scripts/pep8'
 
 
 filetype plugin indent on     " required!
