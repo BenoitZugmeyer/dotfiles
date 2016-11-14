@@ -39,6 +39,7 @@ Plugin 'mikewest/vimroom'
 Plugin 'joonty/vdebug'
 Plugin 'vim-scripts/vimwiki'
 Plugin 'tpope/vim-vinegar'
+Plugin 'vim-airline/vim-airline'
 
 Plugin 'junegunn/vim-easy-align'
 Plugin 'Shougo/unite.vim'
@@ -161,6 +162,8 @@ let g:syntastic_javascript_jsxhint_args = "--extract auto --harmony"
 
 let g:syntastic_auto_jump=0
 let g:syntastic_stl_format = 'Error line %F (%t)'
+
+let g:airline_powerline_fonts = 1
 
 " Restore cursor position on opening a file
 function! ResCur()
