@@ -16,7 +16,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'mitsuhiko/vim-jinja'
 Plugin 'groenewege/vim-less'
 Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'mozilla/rust', {'rtp': 'src/etc/vim'}
+Plugin 'rust-lang/rust.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
