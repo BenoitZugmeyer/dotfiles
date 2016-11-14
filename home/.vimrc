@@ -227,10 +227,6 @@ nnoremap <Leader>js ms
     \ :%s/}\n\s*else/} else/ge<Return>
     \ 'szz
 
-" Move current line up and down
-nnoremap - ddp
-nnoremap _ ddkP
-
 " Select previously pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " Select previously entered text
@@ -273,21 +269,8 @@ nnoremap <leader>cd :cd %:p:h<cr>
 " dvorak specific
 noremap ; :
 
-"nnoremap <silent><C-o> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
-"nnoremap <silent><C-S-o> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-"nnoremap <silent><C-o>   :set paste<CR>m`o<Esc>``:set nopaste<CR>
-"nnoremap <silent><C-O> :set paste<CR>m`O<Esc>``:set nopaste<CR>
-
-inoremap kk <Esc>
-noremap k :w<CR>
-
-
-
-
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
-
-
 
 vnoremap p pgvy
 
