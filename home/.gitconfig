@@ -33,6 +33,7 @@
     co = checkout
     cp = cherry-pick
     df = diff
+	gerp = grep
     dfc = diff --cached
     lg = log -p -C -D
     lol = log --graph --decorate --oneline
@@ -50,6 +51,7 @@
     wdfc = diff -b -w --word-diff=color --cached --word-diff-regex='\\(|\\)|[^[:space:]()]+'
     files = show --pretty="format:" --name-only
     clean-merge-files = !find '(' -name '*_BASE_*' -o -name '*_LOCAL_*' -o -name '*_REMOTE_*' -o -name '*_BACKUP_*' -o -name '*.orig' ')' -delete
+	git = !git
 
 [rerere]
     enabled = true
@@ -58,6 +60,7 @@
     conflictstyle = diff3
 [push]
 	default = simple
+	followTags = true
 [diff]
 	algorithm = patience
 	noprefix = true
@@ -69,3 +72,9 @@
 	autosquash = true
 [tag]
 	sort = version:refname
+[interactive]
+	singleKey = true
+[pager]
+    log = diff-highlight | less -S
+    diff = diff-highlight | less -S
+    show = diff-highlight | less -S
