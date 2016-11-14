@@ -35,7 +35,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'slack/vim-l9'
 Plugin 'scrooloose/syntastic'
-Plugin 'mikewest/vimroom'
 Plugin 'joonty/vdebug'
 Plugin 'vim-scripts/vimwiki'
 Plugin 'tpope/vim-vinegar'
@@ -265,22 +264,6 @@ function! Ranger()
 endfunction
 nmap <leader>o :call Ranger()<cr>
 
-
-
-""" FocusMode
-let g:vimroom_width = &colorcolumn - 1
-function! ToggleFocusMode()
-    set noruler
-    set nolist
-    GitGutterToggle
-    VimroomToggle
-endfunc
-nnoremap <F4> :call ToggleFocusMode()<cr>
-
-let g:tagbar_type_javascript = {
-    \ 'ctagsbin' : '/home/alk/doctorjs/bin/jsctags.js'
-    \ }
-
 function! MyFoldText() " {{{
     let line = getline(v:foldstart)
 
@@ -297,21 +280,3 @@ function! MyFoldText() " {{{
     return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
-
-function! ExtractLocalVariable()
-    let name = input("Variable name: ")
-
-    if (visualmode() == "")
-        normal! viw
-    else
-        normal! gv
-    endif
-
-    exec "normal! c" . name
-    let selection = @"
-    exec "normal! Ovar " . name . " = "
-    exec "normal! pa;"
-    call feedkeys(':.+1,$s/\V\C' . escape(selection, '/\') . '/' . escape(name, '/\') . "/gec\<cr>")
-endfunction
-
-vnoremap r :call ExtractLocalVariable()<CR>
