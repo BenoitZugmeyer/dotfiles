@@ -41,6 +41,7 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'vim-airline/vim-airline'
 
 Plugin 'junegunn/vim-easy-align'
+Plugin 'morhetz/gruvbox'
 
 
 " Unused, but to keep in mind
@@ -66,7 +67,12 @@ set title                     " show title in console title bar
 set wildmenu                  " Menu completion in command mode on <Tab>
 set wildmode=full             " <Tab> cycles between all matching choices.
 set t_Co=256
-colorscheme alk
+set termguicolors
+
+let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_italic=1
+let g:gruvbox_number_column="bg1"
+colorscheme gruvbox
 
 " don't bell or blink
 set noerrorbells
