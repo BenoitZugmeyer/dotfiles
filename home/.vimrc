@@ -165,17 +165,10 @@ let g:syntastic_stl_format = 'Error line %F (%t)'
 
 let g:airline_powerline_fonts = 1
 
-" Restore cursor position on opening a file
-function! ResCur()
-    if line("'\"") <= line("$")
-        normal! g`"
-        return 1
-    endif
-endfunction
-
 augroup resCur
     autocmd!
-    autocmd BufWinEnter * call ResCur()
+    autocmd BufWinLeave ?* if &filetype!=#'netrw' | mkview | endif
+    autocmd BufWinEnter ?* if &filetype!=#'netrw' | silent loadview | endif
 augroup END
 
 " close preview window automatically when we move around
@@ -347,19 +340,6 @@ function! MyFoldText() " {{{
     return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
-" Restore cursor position on opening a file
-function! ResCur()
-    if line("'\"") <= line("$")
-        normal! g`"
-        return 1
-    endif
-endfunction
-
-augroup resCur
-    autocmd!
-    autocmd BufWinEnter * call ResCur()
-augroup END
-
 
 function! ExtractLocalVariable()
     let name = input("Variable name: ")
