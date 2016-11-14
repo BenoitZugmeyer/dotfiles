@@ -41,6 +41,12 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'vim-airline/vim-airline'
 
 Plugin 'junegunn/vim-easy-align'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
+Plugin 'junegunn/vim-peekaboo'
+
 Plugin 'morhetz/gruvbox'
 
 
@@ -232,6 +238,17 @@ nnoremap <Leader>js ms
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " Select previously entered text
 nnoremap gV `[v`]
+
+nnoremap <C-w> :<C-u>Files<cr>
+inoremap <C-w> <C-o>:<C-u>Files<cr>
+nnoremap <C-x> :<C-u>Buffers<cr>
+inoremap <C-x> <C-o>:<C-u>Buffers<cr>
+nnoremap <C-c> :<C-u>History<cr>
+inoremap <C-c> <C-o>:<C-u>History<cr>
+
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
