@@ -42,10 +42,6 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'vim-airline/vim-airline'
 
 Plugin 'junegunn/vim-easy-align'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/neomru.vim'
-Plugin 'lambdalisue/unite-grep-vcs'
-Plugin 'Shougo/unite-outline'
 
 
 " Unused, but to keep in mind
@@ -231,28 +227,6 @@ nnoremap <Leader>js ms
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " Select previously entered text
 nnoremap gV `[v`]
-
-" Unite
-let g:unite_source_history_yank_enable = 1
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_selecta'])
-nnoremap <F1> :<C-u>Unite -start-insert file_rec/git<cr>
-inoremap <F1> :<C-u>Unite -start-insert file_rec/git<cr>
-nnoremap <F2> :<C-u>Unite -start-insert buffer<cr>
-inoremap <F2> :<C-u>Unite -start-insert buffer<cr>
-
-nnoremap <C-o> :<C-u>Unite -start-insert file_rec/git<cr>
-nnoremap <C-b> :<C-u>Unite -start-insert buffer<cr>
-nnoremap <C-l> :<C-u>Unite -start-insert line:buffers<cr>
-vnoremap <C-l> :<C-u>UniteWithCursorWord -start-insert line:buffers<cr>
-nnoremap <C-e> :<C-u>Unite -start-insert history/yank<cr>
-nnoremap <C-m> :<C-u>Unite -start-insert file_mru<cr>
-nnoremap <C-g> :<C-u>Unite -start-insert grep/git:/<cr>
-vnoremap <C-g> :<C-u>UniteWithCursorWord -start-insert grep/git:/<cr>
-
-" function! s:UniteSettings()
-" endfunction
-" au FileType unite call s:UniteSettings()
 
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
