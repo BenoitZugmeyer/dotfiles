@@ -1,11 +1,11 @@
 
-set nocompatible               " be iMproved
-filetype off                   " required!
+set nocompatible               " be iMproved, required for vundle
+filetype off                   " required for vundle
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " Syntax, indent...
 Plugin 'kchmck/vim-coffee-script'
@@ -57,9 +57,8 @@ Plugin 'Shougo/unite-outline'
 " Plugin 'tpope/vim-vividchalk'
 " Plugin 'vim-scripts/pep8'
 
-
-filetype plugin indent on     " required!
-
+call vundle#end()            " required for vundle
+filetype plugin indent on    " required for vundle
 
 syntax on                     " syntax highlighing
 set synmaxcol=450
