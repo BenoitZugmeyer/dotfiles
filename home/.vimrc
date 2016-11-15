@@ -194,6 +194,8 @@ runtime macros/matchit.vim
 
 let mapleader=","             " change the leader to be a comma vs slash
 
+map <Leader> <Plug>(easymotion-prefix)
+
 " Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
 
