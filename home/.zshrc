@@ -160,8 +160,8 @@ has-command () {
 }
 
 eval `dircolors -b`  # nice colors with ls
-alias ls="ls --color=auto"
-alias l="ls --color=auto --ignore='*.pyc'"
+alias ls="ls --color=auto -N"
+alias l="ls --color=auto -N"
 alias vi=vim
 alias v=vim
 alias :e=vim
