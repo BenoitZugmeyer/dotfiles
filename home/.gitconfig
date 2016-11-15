@@ -50,7 +50,17 @@
     cpc = cherry-pick --continue
     wdfc = diff -b -w --word-diff=color --cached --word-diff-regex='\\(|\\)|[^[:space:]()]+'
     files = show --pretty="format:" --name-only
-    clean-merge-files = !find '(' -name '*_BASE_*' -o -name '*_LOCAL_*' -o -name '*_REMOTE_*' -o -name '*_BACKUP_*' -o -name '*.orig' ')' -delete
+    clean-merge-files = !find '(' \
+        -name '*.BASE.*' \
+        -o -name '*.LOCAL.*' \
+        -o -name '*.REMOTE.*' \
+        -o -name '*.BACKUP.*' \
+        -o -name '*_BASE_*' \
+        -o -name '*_LOCAL_*' \
+        -o -name '*_REMOTE_*' \
+        -o -name '*_BACKUP_*' \
+        -o -name '*.orig' \
+    ')' -delete
 	git = !git
 
 [rerere]
