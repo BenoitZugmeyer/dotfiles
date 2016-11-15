@@ -64,3 +64,15 @@ function bind-git-helper() {
 }
 bind-git-helper f b t r h
 unset -f bind-git-helper
+
+
+function fzf-f-widget() {
+  setopt localoptions pipefail 2> /dev/null
+  cd "${$(eval "fasd -ldR | $(__fzfcmd) +m $FZF_ALT_C_OPTS"):-.}"
+  local ret=$?
+  zle reset-prompt
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  return $ret
+}
+zle -N fzf-f-widget
+bindkey '^f' fzf-f-widget
