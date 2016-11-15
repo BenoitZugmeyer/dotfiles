@@ -41,7 +41,7 @@
     lolf = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
     ls = ls-files
     rb = pull --rebase
-    svnid = !git --no-pager log --all --pretty=format:\"%H %s\" --grep
+    svnid = "!bash -c 'git --no-pager log --all --pretty=format:\"%H %s\" --grep \"@$1\"' -- "
     rmd = !git status --porcelain | awk ' /^ D/ { print $2 }' | xargs git rm
     ff = merge --ff-only
     resolve = update-index
