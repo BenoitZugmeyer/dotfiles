@@ -16,6 +16,12 @@ export PATH=$PATH:~/bin:~/.gem/ruby/2.1.0/bin:~/.composer/vendor/bin:~/.cargo/bi
 export PAGER=less
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+ORIGINAL_PATH="$PATH"
+function npm-path () {
+    local npm_path=$(npm bin)
+    echo "Adding $npm_path to the path"
+    export PATH="$npm_path:$ORIGINAL_PATH"
+}
 
 
 # History
