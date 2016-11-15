@@ -28,7 +28,7 @@
 
 [alias]
     st = status -sb
-    ci = commit
+    ci = !"bash -c 'git commit -t <( echo \"\n\"; git log --pretty=format:\\#\\ %\\<\\|\\(15\\)%an\\ %s -15 ) \"${@}\"' - "
     br = branch
     co = checkout
     cp = cherry-pick
