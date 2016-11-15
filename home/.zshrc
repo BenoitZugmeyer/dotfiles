@@ -347,3 +347,10 @@ bindkey '^X^e' edit-command-line
 
 eval "$(fasd --init auto)" # fasd
 alias j=z
+
+unalias f  # f is aliased by fasd to 'fasd -f'
+function f () {
+    filter=$1
+    shift
+    find -iname "*$filter*" "$@"
+}
