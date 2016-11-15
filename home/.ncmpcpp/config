@@ -1,25 +1,26 @@
 #see /usr/share/doc/ncmpcpp/config for docs
 
 mpd_music_dir = "/media/data/Musique"
-song_status_format = "$6%a $1• $5%t $1• $4%b {(Disc %d) }$1• $5%y$0"
+song_status_format = "$6%a $1• $5%t $1• $4%b $1• $5%y$0"
 song_columns_list_format = (25)[magenta]{a} (25)[blue]{b} (50)[yellow]{t|f}
 playlist_shorten_total_times = yes
-playlist_display_mode = columns
 browser_display_mode = columns
 search_engine_display_mode = columns
 playlist_editor_display_mode = columns
 autocenter_mode = yes
 progressbar_look = "─╼ "
-data_fetching_delay = yes
 media_library_primary_tag = album_artist
 header_visibility = no
 titles_visibility = no
+cyclic_scrolling = yes
 follow_now_playing_lyrics = yes
 fetch_lyrics_for_current_song_in_background = yes
 store_lyrics_in_song_dir = yes
 lastfm_preferred_language = fr
 screen_switcher_mode = playlist, media_library, clock
 display_volume_level = no
+display_bitrate = yes
+ignore_leading_the = yes
 block_search_constraints_change_if_items_found = no
 mouse_support = no
 external_editor = vim
