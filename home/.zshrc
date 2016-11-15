@@ -27,6 +27,8 @@ bindkey '^X^e' edit-command-line
 alias :e=vim
 alias psg='ps aux | grep -v grep | grep'
 alias scu='systemctl --user'
+alias xcopy="xclip -selection clipboard"
+alias xpaste="xclip -o -selection clipboard"
 
 # end of line aliases
 alias -g P='|less'  # paginate
