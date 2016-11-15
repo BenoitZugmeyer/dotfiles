@@ -22,7 +22,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " Edition helper
 Plugin 'tpope/vim-commentary'
-Plugin 'Lokaltog/vim-easymotion'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'SirVer/ultisnips'
