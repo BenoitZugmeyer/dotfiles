@@ -41,6 +41,9 @@ eval "$(fasd --init auto)" # fasd
 alias j=z
 unalias f  # f is aliased to 'fasd -f', and conflicts with our f function
 
+# fzf
+source /etc/profile.d/fzf.zsh
+
 function load () {
     source "$HOME/.zsh/conf/$1.zsh"
 }
