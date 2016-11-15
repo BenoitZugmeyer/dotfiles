@@ -53,5 +53,6 @@ load prompt-alk
 load prompt-git-info
 load rationalize-dot
 load f
+load fzf-extra
 
 unset load
