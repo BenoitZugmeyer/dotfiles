@@ -82,6 +82,8 @@
 	autosquash = true
 [tag]
 	sort = version:refname
+[svn]
+	rmdir = true
 [interactive]
 	singleKey = true
 [pager]
