@@ -5,7 +5,6 @@
                                   # when logging on ssh servers
 
 autoload colors; colors  # so we can use $fg / $bg
-source /etc/profile  # autojump support
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Environment
@@ -345,3 +344,6 @@ function prompt_git_info() {
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^X^e' edit-command-line
+
+eval "$(fasd --init auto)" # fasd
+alias j=z
