@@ -44,7 +44,7 @@ function run () {
     if $DRY_RUN; then
         echo "#" "${@}"
     else
-        ${@}
+        "${@}"
     fi
 }
 
