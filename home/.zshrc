@@ -51,7 +51,6 @@ function load () {
 load npm-path
 load prompt-alk
 load prompt-git-info
-load rationalize-dot
 load f
 load fzf-extra
 
