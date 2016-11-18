@@ -11,6 +11,7 @@ setopt hist_reduce_blanks  # save the command "echo   plop" as "echo plop"
 
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 unsetopt extendedglob
+setopt menu_complete
 
 # keys
 bindkey "\eOA" history-beginning-search-backward # up
