@@ -46,6 +46,9 @@ unalias f  # f is aliased to 'fasd -f', and conflicts with our f function
 # fzf
 source /etc/profile.d/fzf.zsh
 
+# depot-tools
+source /etc/profile.d/depot_tools.sh
+
 function load () {
     source "$HOME/.zsh/conf/$1.zsh"
 }
