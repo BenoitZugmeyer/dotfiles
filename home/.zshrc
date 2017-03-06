@@ -1,22 +1,43 @@
+autoload -Uz promptinit && promptinit
+autoload -U compinit && compinit
+autoload -U colors && colors
 
 # env
 export EDITOR=vim
-export PATH=$PATH:~/bin:~/.gem/ruby/2.1.0/bin:~/.composer/vendor/bin:~/.cargo/bin
+export PATH=$PATH:~/.bin:~/.gem/ruby/2.1.0/bin:~/.composer/vendor/bin:~/.cargo/bin
 export PAGER=less
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 export HISTSIZE=100000  # huge history size
 export SAVEHIST=100000  # save all history when quitting
-setopt hist_reduce_blanks  # save the command "echo   plop" as "echo plop"
+export HISTFILE=~/.zhistory
 
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-unsetopt extendedglob
-setopt menu_complete
-unset VIRTUAL_ENV_DISABLE_PROMPT
+# options
+setopt APPEND_HISTORY
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
+setopt SHARE_HISTORY
+setopt DVORAK
+setopt MENU_COMPLETE
+setopt PROMPT_SUBST
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+setopt NO_CLOBBER
+
 
 # keys
-bindkey "\eOA" history-beginning-search-backward # up
-bindkey "\eOB" history-beginning-search-forward  # down
+bindkey -e
+bindkey "^[[A" history-beginning-search-backward # up
+bindkey "^[[B" history-beginning-search-forward  # down
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
 
 bindkey '^Z' push-input # stash the current input and pop it to the next
                         # command prompt
@@ -25,12 +46,39 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^X^e' edit-command-line
 
+# completions
+eval $(dircolors)
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' menu yes select
+zstyle ':completion:*' format "$fg_bold[grey]%d$reset_color"
+zstyle ':completion:*' group-name ''  # Display everything in groups
+
+# Completers list
+zstyle ':completion:*' completer _expand _complete _match _approximate
+
+# Fuzzy completion
+zstyle ':completion:*' matcher-list '+m:{a-z}={A-Z} r:|[._-]=** r:|=**' '' '' \
+    '+m:{a-z}={A-Z} r:|[._-]=** r:|=**'
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+
+zstyle ':completion:*:kill:*' force-list always
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+# Do not complete already selected arguments
+zstyle ':completion:*:(rm|kill|diff):*' ignore-line yes
+
+
 # aliases
 alias :e=vim
 alias psg='ps aux | grep -v grep | grep'
 alias scu='systemctl --user'
 alias xcopy="xclip -selection clipboard"
 alias xpaste="xclip -o -selection clipboard"
+alias torrent='ssh -t crocus screen -x torrent/'
+alias rm-vim-tmp-files='rm -rf ~/.vim/view/* ~/.vim/tmp/*'
+alias ls='ls --color'
+
 
 # end of line aliases
 alias -g P='|less'  # paginate
@@ -44,10 +92,16 @@ alias j=z
 unalias f  # f is aliased to 'fasd -f', and conflicts with our f function
 
 # fzf
-source /etc/profile.d/fzf.zsh
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
 
 # depot-tools
-source /etc/profile.d/depot_tools.sh
+#source /etc/profile.d/depot_tools.sh
+
+source /usr/share/doc/pkgfile/command-not-found.zsh
+
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 
 function load () {
     source "$HOME/.zsh/conf/$1.zsh"
@@ -58,5 +112,7 @@ load prompt-alk
 load prompt-git-info
 load f
 load fzf-extra
+load manydots-magic
 
 unset load
+
