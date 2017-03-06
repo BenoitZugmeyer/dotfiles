@@ -19,6 +19,7 @@ Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'rust-lang/rust.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'cespare/vim-toml'
 
 " Edition helper
 Plugin 'tpope/vim-commentary'
@@ -243,12 +244,12 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " Select previously entered text
 nnoremap gV `[v`]
 
-nnoremap <C-w> :<C-u>Files<cr>
-inoremap <C-w> <C-o>:<C-u>Files<cr>
-nnoremap <C-x> :<C-u>Buffers<cr>
-inoremap <C-x> <C-o>:<C-u>Buffers<cr>
-nnoremap <C-c> :<C-u>History<cr>
-inoremap <C-c> <C-o>:<C-u>History<cr>
+nnoremap <F1> :<C-u>Files<cr>
+inoremap <F1> <C-o>:<C-u>Files<cr>
+nnoremap <F2> :<C-u>Buffers<cr>
+inoremap <F2> <C-o>:<C-u>Buffers<cr>
+nnoremap <F3> :<C-u>History<cr>
+inoremap <F3> <C-o>:<C-u>History<cr>
 
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
