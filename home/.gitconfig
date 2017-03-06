@@ -25,6 +25,8 @@
 [core]
     whitespace = space-before-tab,-indent-with-non-tab,tab-in-indent,trailing-space,cr-at-eol,tabwidth=4
     warnAmbiguousRefs = false
+	excludesfile = ~/.gitignore
+	pager = less -S
 
 [alias]
     st = status -sb
@@ -87,6 +89,6 @@
 [interactive]
 	singleKey = true
 [pager]
-    log = diff-highlight | less -S
-    diff = diff-highlight | less -S
-    show = diff-highlight | less -S
+    log = /usr/share/git/diff-highlight/diff-highlight | less -S
+    diff = /usr/share/git/diff-highlight/diff-highlight | less -S
+    show = /usr/share/git/diff-highlight/diff-highlight | less -S
