@@ -92,6 +92,18 @@ alias j=z
 unalias f  # f is aliased to 'fasd -f', and conflicts with our f function
 
 # fzf
+# same as default fzf command, except it lists dot files
+export FZF_DEFAULT_COMMAND='command find -L .       \
+    -mindepth 1                                     \
+    \(                                              \
+        -path "*/\.git/*" -o                        \
+        -fstype "sysfs" -o                          \
+        -fstype "devfs" -o                          \
+        -fstype "devtmpfs" -o                       \
+        -fstype "proc"                              \
+    \) -prune -o                                    \
+    -type f -print -o                               \
+    -type l -print 2> /dev/null | cut -b3-'
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 
