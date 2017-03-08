@@ -35,7 +35,7 @@ Plugin 'chrisbra/unicode.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'slack/vim-l9'
-Plugin 'scrooloose/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'joonty/vdebug'
 Plugin 'vim-scripts/vimwiki'
 Plugin 'tpope/vim-vinegar'
@@ -134,7 +134,7 @@ set report=0                " : commands always print changed line count.
 set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
 set laststatus=2            " Always show statusline, even if only 1 window.
 set statusline=%<%{fugitive#statusline()}\ %F\ %M%R%H
-set statusline+=%#warningmsg#%{SyntasticStatuslineFlag()}%*
+set statusline+=%#warningmsg#%{ALEGetStatusLine()}%*
 set statusline+=%=%{&ff}%Y,%{&fenc}\ \|\ %l/%L:%v\ %P\ 
 set colorcolumn=100
 set textwidth=100
@@ -161,17 +161,18 @@ set formatoptions=croqlj
 " Always use one window for netrw
 let g:netrw_chgwin=1
 
-" Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_javascript_checkers=["jsxhint"]
-let g:syntastic_javascript_jshint_args = "--extract auto"
-let g:syntastic_javascript_jsxhint_args = "--extract auto --harmony"
-
-let g:syntastic_auto_jump=0
-let g:syntastic_stl_format = 'Error line %F (%t)'
+" ALE
+let g:ale_linters = {
+            \   'javascript': ['eslint'],
+            \}
+nmap <silent> <C-p> <Plug>(ale_previous_wrap)
+nmap <silent> <C-n> <Plug>(ale_next_wrap)
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '●'
+" GruvboxOrange
+highlight ALEWarningSign term=underline ctermfg=208 ctermbg=237 guifg=#fe8019 guibg=#3c3836
+" GruvboxRed
+highlight ALEErrorSign term=underline ctermfg=167 ctermbg=237 guifg=#fb4934 guibg=#3c3836
 
 let g:airline_powerline_fonts = 1
 
