@@ -4,7 +4,7 @@ autoload -U colors && colors
 
 # env
 export EDITOR=vim
-export PATH=$PATH:~/.bin:~/.gem/ruby/2.1.0/bin:~/.composer/vendor/bin:~/.cargo/bin
+export PATH=$PATH:~/.bin:~/.composer/vendor/bin:~/.cargo/bin:~/.npm/bin
 export PAGER=less
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
