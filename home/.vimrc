@@ -20,6 +20,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'cespare/vim-toml'
+Plugin 'leafgarland/typescript-vim'
 
 " Edition helper
 Plugin 'tpope/vim-commentary'
@@ -30,6 +31,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'vis'
 Plugin 'chrisbra/unicode.vim'
+Plugin 'sbdchd/neoformat'
 
 " Other
 Plugin 'tpope/vim-fugitive'
@@ -38,7 +40,7 @@ Plugin 'slack/vim-l9'
 Plugin 'w0rp/ale'
 Plugin 'joonty/vdebug'
 Plugin 'vim-scripts/vimwiki'
-Plugin 'tpope/vim-vinegar'
+Plugin 'justinmk/vim-dirvish'
 Plugin 'vim-airline/vim-airline'
 
 Plugin 'junegunn/vim-easy-align'
@@ -251,6 +253,8 @@ nnoremap <F2> :<C-u>Buffers<cr>
 inoremap <F2> <C-o>:<C-u>Buffers<cr>
 nnoremap <F3> :<C-u>History<cr>
 inoremap <F3> <C-o>:<C-u>History<cr>
+nnoremap <F4> :<C-u>Neoformat<cr>
+inoremap <F4> <C-o>:<C-u>Neoformat<cr>
 
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
