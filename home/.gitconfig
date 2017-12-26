@@ -35,6 +35,7 @@
     co = checkout
     cp = cherry-pick
     df = diff
+    fa = fetch --all
 	gerp = grep
     dfc = diff --cached
     lg = log -p -C -D
@@ -64,9 +65,10 @@
         -o -name '*.orig' \
     ')' -delete
 	git = !git
+    list-branches = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 
 [rerere]
-    enabled = true
+    enabled = false
 
 [merge]
     conflictstyle = diff3
@@ -74,6 +76,7 @@
 	default = simple
 	followTags = true
 [diff]
+    compactionHeuristic = true
 	algorithm = patience
 	noprefix = true
 [branch]
