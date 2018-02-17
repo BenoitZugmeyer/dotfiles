@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+
+trap 'rm "$TMPFILE"' exit
+
+TMPFILE=$(mktemp)
+
+chmod o-r $TMPFILE
+(xsel -o --clipboard || true) > $TMPFILE
+konsole -e "/bin/bash -c 'vim -c \":set nofixeol\" -c \":set noeol\" $TMPFILE'"
+xsel --clipboard < $TMPFILE

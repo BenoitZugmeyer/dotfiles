@@ -489,6 +489,9 @@ globalkeys = awful.util.table.join(
     awful.key({}, '#180', spawn('firefox-nightly')),
     awful.key({}, '#163', spawn('thunderbird')),
     awful.key({}, '#225', spawn('dolphin')),
+    awful.key({}, '#225', spawn('dolphin')),
+    awful.key({ modkey }, 'u', spawn('vim-clip')),
+    awful.key({ modkey, 'Shift' }, 'u', spawn(terminal .. ' -e "vim $HOME/.vim-note"')),
     awful.key({ modkey }, 'F12', function ()
         local muted = volume.muted()
         volume.mute()

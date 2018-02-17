@@ -49,6 +49,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'junegunn/vim-peekaboo'
+Plugin 'junegunn/vim-journal'
 
 Plugin 'morhetz/gruvbox'
 
