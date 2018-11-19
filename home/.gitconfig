@@ -25,8 +25,8 @@
 [core]
     whitespace = space-before-tab,-indent-with-non-tab,tab-in-indent,trailing-space,cr-at-eol,tabwidth=4
     warnAmbiguousRefs = false
-	excludesfile = ~/.gitignore
-	pager = less -S
+    excludesfile = ~/.gitignore
+    pager = less -S
 
 [alias]
     st = status -sb
@@ -36,7 +36,7 @@
     cp = cherry-pick
     df = diff
     fa = fetch --all
-	gerp = grep
+    gerp = grep
     dfc = diff --cached
     lg = log -p -C -D
     lol = log --graph --decorate --oneline
@@ -44,6 +44,7 @@
     lolf = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
     ls = ls-files
     rb = pull --rebase
+    pushf = push --force-with-lease
     svnid = "!bash -c 'git --no-pager log --all --pretty=format:\"%H %s\" --grep \"@$1\"' -- "
     rmd = !git status --porcelain | awk ' /^ D/ { print $2 }' | xargs git rm
     ff = merge --ff-only
@@ -64,7 +65,7 @@
         -o -name '*_BACKUP_*' \
         -o -name '*.orig' \
     ')' -delete
-	git = !git
+    git = !git
     list-branches = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 
 [rerere]
@@ -73,24 +74,24 @@
 [merge]
     conflictstyle = diff3
 [push]
-	default = simple
-	followTags = true
+    default = simple
+    followTags = true
 [diff]
     compactionHeuristic = true
-	algorithm = patience
-	noprefix = true
+    algorithm = patience
+    noprefix = true
 [branch]
-	autosetuprebase = always
+    autosetuprebase = always
 [log]
-	date = local
+    date = local
 [rebase]
-	autosquash = true
+    autosquash = true
 [tag]
-	sort = version:refname
+    sort = version:refname
 [svn]
-	rmdir = true
+    rmdir = true
 [interactive]
-	singleKey = true
+    singleKey = true
 [pager]
     log = /usr/share/git/diff-highlight/diff-highlight | less -S
     diff = /usr/share/git/diff-highlight/diff-highlight | less -S
