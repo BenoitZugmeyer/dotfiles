@@ -3,7 +3,7 @@ autoload -U compinit && compinit
 autoload -U colors && colors
 
 # env
-export EDITOR=vim
+export EDITOR=nvim
 export PATH=$PATH:~/.bin:~/.composer/vendor/bin:~/.cargo/bin:~/.npm/bin
 export PAGER=less
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
@@ -70,13 +70,14 @@ zstyle ':completion:*:(rm|kill|diff):*' ignore-line yes
 
 
 # aliases
-alias :e=vim
+alias :e=nvim
+alias vim=nvim
 alias psg='ps aux | grep -v grep | grep'
 alias scu='systemctl --user'
 alias xcopy="xclip -selection clipboard"
 alias xpaste="xclip -o -selection clipboard"
 alias torrent='ssh -t crocus screen -x torrent/'
-alias rm-vim-tmp-files='rm -rf ~/.vim/view/* ~/.vim/tmp/*'
+alias rm-vim-tmp-files='find ~/.vim/tmp/ ~/.vim/view/ ~/.local/share/nvim/view ~/.local/share/nvim/swap -type f -delete'
 alias ls='ls --color'
 
 
