@@ -17,6 +17,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'posva/vim-vue'
+Plug 'nikvdp/ejs-syntax'
 
 " Linters and stuff
 Plug 'autozimu/LanguageClient-neovim', {
@@ -49,6 +50,7 @@ call plug#end()
 let mapleader=","
 set background=dark
 set termguicolors
+set nostartofline
 set clipboard=unnamedplus
 set hidden
 set nobackup
@@ -132,6 +134,7 @@ nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 let g:LanguageClient_serverCommands = {
     \ 'reason': ['ocaml-language-server', '--stdio'],
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ 'dart': ['dart_language_server'],
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
     \ 'typescript': ['typescript-language-server', '--stdio'],
     \ 'typescript.tsx': ['typescript-language-server', '--stdio'],
@@ -160,6 +163,7 @@ let g:ale_linters = {
             \   'javascript': ['eslint'],
             \   'typescript': ['tsserver'],
             \   'html': ['eslint'],
+            \   'dart': [],
             \}
 let g:ale_fixers = {
             \   'javascript': ['eslint'],
@@ -168,6 +172,7 @@ let g:ale_fixers = {
             \   'html': ['tidy'],
             \   'typescript': ['prettier'],
             \   'css': ['prettier'],
+            \   'dart': ['dartfmt'],
             \}
 
 " Smart cursorline
