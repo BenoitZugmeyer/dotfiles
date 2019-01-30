@@ -54,3 +54,9 @@ rv = re.sub(r'-(.)', lambda match: match.group(1).upper(), rv)
 snip.rv = rv
 `} from '$1'
 endsnippet
+
+snippet f "function"
+function ${1}(${2}) {
+	${3}
+}
+endsnippet

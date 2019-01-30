@@ -2,8 +2,13 @@ extends javascript
 
 snippet vbase ""
 <template>
-	<div class="$1">
-
+	<div class="${1:`!p
+rv = fn.partition('.')[0]
+rv = re.sub(r'[A-Z]', lambda match: ('-' if match.start() > 0 else '') + match.group(0).lower(), rv)
+rv = rv + '-component'
+snip.rv = rv
+`}">
+		$2
 	</div>
 </template>
 
