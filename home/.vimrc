@@ -1,71 +1,70 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-set nocompatible               " be iMproved, required for vundle
-filetype off                   " required for vundle
 
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " Syntax, indent...
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-git'
-Plugin 'othree/html5.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'mitsuhiko/vim-jinja'
-Plugin 'groenewege/vim-less'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'rust-lang/rust.vim'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'cespare/vim-toml'
-Plugin 'leafgarland/typescript-vim'
+Plug 'kchmck/vim-coffee-script'
+Plug 'tpope/vim-git'
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'mitsuhiko/vim-jinja'
+Plug 'groenewege/vim-less'
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'rust-lang/rust.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'cespare/vim-toml'
+Plug 'leafgarland/typescript-vim'
 
 " Edition helper
-Plugin 'tpope/vim-commentary'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'vis'
-Plugin 'chrisbra/unicode.vim'
-Plugin 'sbdchd/neoformat'
+Plug 'tpope/vim-commentary'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'vim-scripts/vis'
+Plug 'chrisbra/unicode.vim'
+Plug 'sbdchd/neoformat'
 
 " Other
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'slack/vim-l9'
-Plugin 'w0rp/ale'
-Plugin 'joonty/vdebug'
-Plugin 'vim-scripts/vimwiki'
-Plugin 'justinmk/vim-dirvish'
-Plugin 'vim-airline/vim-airline'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'slack/vim-l9'
+Plug 'w0rp/ale'
+Plug 'joonty/vdebug'
+Plug 'vim-scripts/vimwiki'
+Plug 'justinmk/vim-dirvish'
+Plug 'vim-airline/vim-airline'
 
-Plugin 'junegunn/vim-easy-align'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
-Plugin 'junegunn/vim-peekaboo'
-Plugin 'junegunn/vim-journal'
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/vim-journal'
 
-Plugin 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 
 
 " Unused, but to keep in mind
-" Plugin 'altercation/vim-colors-solarized'
-" Plugin 'hallettj/jslint.vim'
-" Plugin 'mileszs/ack.vim'
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Plugin 'sjl/gundo.vim'
-" Plugin 'tpope/vim-pathogen'
-" Plugin 'tpope/vim-vividchalk'
-" Plugin 'vim-scripts/pep8'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'hallettj/jslint.vim'
+" Plug 'mileszs/ack.vim'
+" Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Plug 'sjl/gundo.vim'
+" Plug 'tpope/vim-pathogen'
+" Plug 'tpope/vim-vividchalk'
+" Plug 'vim-scripts/pep8'
 
-call vundle#end()            " required for vundle
-filetype plugin indent on    " required for vundle
+call plug#end()
 
 syntax on                     " syntax highlighing
 set synmaxcol=450
