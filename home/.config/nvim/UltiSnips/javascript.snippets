@@ -1,0 +1,56 @@
+
+snippet cl "console.log"
+console.log(${0})
+endsnippet
+
+snippet clj "console.log json"
+console.log(JSON.stringify(${0}, null, 2))
+endsnippet
+
+snippet test ""
+test("${1}", () => {
+	${2}
+})
+endsnippet
+
+snippet des ""
+describe("${1}", () => {
+	${2}
+})
+endsnippet
+
+snippet it ""
+it("${1}", () => {
+	${2}
+})
+endsnippet
+
+snippet ex ""
+expect(${1:${VISUAL}}).${2}
+endsnippet
+
+snippet req ""
+const ${2:`!p
+rv = t[1]
+# Remove everything before last slash
+rv = rv.rpartition("/")[2]
+# Remove everything after the last dot
+rv = rv.partition(".")[0]
+# Camelcase dashed names
+rv = re.sub(r'-(.)', lambda match: match.group(1).upper(), rv)
+snip.rv = rv
+`} = require('$1')
+endsnippet
+
+snippet imp ""
+import ${2:`!p
+rv = t[1]
+# Remove everything before last slash
+rv = rv.rpartition("/")[2]
+# Remove everything after the last dot
+rv = rv.partition(".")[0]
+# Camelcase dashed names
+rv = re.sub(r'-(.)', lambda match: match.group(1).upper(), rv)
+snip.rv = rv
+`} from '$1'
+endsnippet
