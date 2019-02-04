@@ -36,11 +36,12 @@
     cp = cherry-pick
     df = diff
     fa = fetch --all
+    fap = fetch --all --prune
     gerp = grep
     dfc = diff --cached
     lg = log -p -C -D
     lol = log --graph --decorate --oneline
-    lola = log --graph --decorate --oneline --all
+    lola = log --graph --decorate --oneline --all --date-order
     lolf = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
     ls = ls-files
     rb = pull --rebase
@@ -51,6 +52,7 @@
     resolve = update-index
     cia = commit --amend
     rbc = rebase --continue
+    rbs = rebase --skip
     cpc = cherry-pick --continue
     wdfc = diff -b -w --word-diff=color --cached --word-diff-regex='\\(|\\)|[^[:space:]()]+'
     files = show --pretty="format:" --name-only
@@ -73,6 +75,7 @@
 
 [merge]
     conflictstyle = diff3
+    ff = false
 [push]
     default = simple
     followTags = true
@@ -80,6 +83,10 @@
     compactionHeuristic = true
     algorithm = patience
     noprefix = true
+[diff "json"]
+    textconv = jq -S .
+[diff "sorted"]
+    textconv = sort
 [branch]
     autosetuprebase = always
 [log]
