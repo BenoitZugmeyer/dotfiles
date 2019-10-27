@@ -51,8 +51,14 @@ zle -N edit-command-line
 bindkey '^X^e' edit-command-line
 
 # completions
-eval $(dircolors)
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+if which dircolors > /dev/null; then
+  eval $(dircolors)
+  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+  alias ls='ls --color'
+else
+  export CLICOLOR=YES
+  zstyle ':completion:*:default' list-colors ''
+fi
 zstyle ':completion:*' menu yes select
 zstyle ':completion:*' format "$fg_bold[grey]%d$reset_color"
 zstyle ':completion:*' group-name ''  # Display everything in groups
@@ -82,7 +88,6 @@ alias xcopy="xclip -selection clipboard"
 alias xpaste="xclip -o -selection clipboard"
 alias torrent='ssh -t crocus screen -x torrent/'
 alias rm-vim-tmp-files='find ~/.vim/tmp/ ~/.vim/view/ ~/.local/share/nvim/view ~/.local/share/nvim/swap -type f -delete'
-alias ls='ls --color'
 
 
 # end of line aliases
