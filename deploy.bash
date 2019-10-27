@@ -5,12 +5,6 @@ set -euo pipefail
 ROOT=$(cd $(dirname $0) && pwd)
 SCRIPT=$(basename $0)
 
-
-SHORT=fn
-LONG=force,dry-run
-PARSED=$(getopt --options $SHORT --longoptions $LONG --name "$0" -- "$@")
-eval set -- "$PARSED"
-
 FORCE=false
 DRY_RUN=false
 
@@ -24,21 +18,14 @@ while true; do
             DRY_RUN=true
             shift
             ;;
-        --)
-            shift
-            break
-            ;;
+        home|root)
+            break;;
         *)
-            echo "Programming error"
-            exit 3
+            echo "Usage: $0 [-f | --force] [-n | --dry-run] root | home"
+            exit 1
             ;;
     esac
 done
-
-if [[ ${#} -eq 0 ]] || [[ "${1}" != root ]] && [[ "${1}" != home ]] ; then
-    echo "Usage: $0 [-f | --force] [-n | --dry-run] root | home"
-    exit 1
-fi
 
 function run () {
     if $DRY_RUN; then
