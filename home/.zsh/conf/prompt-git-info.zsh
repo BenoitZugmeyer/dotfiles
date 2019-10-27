@@ -27,7 +27,7 @@ function prompt_git_info() {
 
     while IFS="" read -r line; do
         if [[ $line = (## *) ]]; then
-            if [[ $line =~ '^## (([^.\[(]|\.[^.\[(])+)[^\[(]*(\[.*?\])?$' ]]; then
+            if [[ $line =~ '^## (([^.\[(]|\.[^.\[(])+)[^\[(]*(\[.*\])?$' ]]; then
                 branch=$match[1]
                 local d=$match[3]
                 [[ $d =~ 'behind ([0-9]+)' ]] &&
