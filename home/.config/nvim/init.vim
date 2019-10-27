@@ -12,33 +12,27 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'cespare/vim-toml'
-"Plug 'leafgarland/typescript-vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'posva/vim-vue'
 Plug 'nikvdp/ejs-syntax'
 
-" Linters and stuff
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'w0rp/ale'
-
 " Edition helper
-Plug 'SirVer/ultisnips'
 Plug 'vim-airline/vim-airline'
 Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" CocInstall coc-tsserver
+" CocInstall coc-git
+" CocInstall coc-yank
+" CocInstall coc-snippets
 
 " Other
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
 Plug 'justinmk/vim-dirvish'
 Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
@@ -47,7 +41,6 @@ Plug 'djoshea/vim-autoread'
 
 call plug#end()
 
-let mapleader=","
 set background=dark
 set termguicolors
 set nostartofline
@@ -65,13 +58,18 @@ set listchars=tab:»\ ,trail:•,precedes:<,extends:>,nbsp:+
 set list
 set ignorecase
 set smartcase
-
-" Increased list of file to use with fzf History command (v:oldfiles variable)
+set rtp+=/usr/local/opt/fzf
 set shada=!,'10000,<50,s10,h
 set formatoptions=croqlj
 set viewoptions=cursor,folds
 set number
 set numberwidth=1
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+
+let mapleader=","
 
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_italic=1
@@ -83,9 +81,6 @@ runtime macros/matchit.vim
 
 map <Leader> <Plug>(easymotion-prefix)
 
-" sudo write this
-cnoremap W! w !sudo tee % >/dev/null
-
 " ctrl-jklm  changes to that split
 noremap <c-left>  <c-w>h
 noremap <c-down>  <c-w>j
@@ -94,6 +89,7 @@ noremap <c-right> <c-w>l
 " and lets make these all work in insert mode too ( <C-O> makes next cmd
 "  happen as if in command mode )
 inoremap <C-W> <C-O><C-W>
+
 " don't outdent hashes
 inoremap # #
 nnoremap <F1> :<C-u>Files<cr>
@@ -102,16 +98,13 @@ nnoremap <F2> :<C-u>Buffers<cr>
 inoremap <F2> <C-o>:<C-u>Buffers<cr>
 nnoremap <F3> :<C-u>History<cr>
 inoremap <F3> <C-o>:<C-u>History<cr>
-nnoremap <F4> :<C-u>ALEFix<cr>
-inoremap <F4> <C-o>:<C-u>ALEFix<cr>
-nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
+
 nnoremap <Home> ^
 inoremap <Home> <C-O>^
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-nnoremap <Leader>r :source $MYVIMRC<CR>
 nnoremap <silent> <Leader>s ms:%s/\s\s*$//g<Return>'szz
 
 " Keep visual selection on indent
@@ -123,6 +116,8 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " Select previously entered text
 nnoremap gV `[v`]
 
+" sudo write this
+cnoremap W! w !sudo tee % >/dev/null
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
 
@@ -130,89 +125,136 @@ cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q')
 nnoremap <leader>z zMzvzczOzz
 nnoremap <Space> za
 
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-let g:LanguageClient_serverCommands = {
-    \ 'reason': ['ocaml-language-server', '--stdio'],
-    \ 'ocaml': ['ocaml-language-server', '--stdio'],
-    \ 'dart': ['dart_language_server'],
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'typescript': ['typescript-language-server', '--stdio'],
-    \ 'typescript.tsx': ['typescript-language-server', '--stdio'],
-    \ }
-    " \ 'javascript': ['javascript-typescript-stdio'],
-    " \ 'typescript': ['javascript-typescript-stdio'],
-" let g:LanguageClient_trace = 'verbose'
-" let g:LanguageClient_windowLogMessageLevel = 'Log'
-" let g:LanguageClient_loggingLevel = 'DEBUG'
-" let g:LanguageClient_loggingLevel = 'DEBUG'
-" let g:LanguageClient_loggingFile = expand('~/.local/share/nvim/LanguageClient.log')
-" let g:LanguageClient_serverStderr = expand('~/.local/share/nvim/LanguageServer.log')
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" Disable deoplete in most cases
-call deoplete#custom#option('auto_complete', v:false)
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 
-call ale#linter#Define('html', {
-\   'name': 'eslint',
-\   'output_stream': 'both',
-\   'executable_callback': 'ale#handlers#eslint#GetExecutable',
-\   'command_callback': 'ale#handlers#eslint#GetCommand',
-\   'callback': 'ale#handlers#eslint#Handle',
-\})
-let g:ale_linters = {
-            \   'javascript': ['eslint'],
-            \   'typescript': ['tsserver'],
-            \   'html': ['eslint'],
-            \   'dart': [],
-            \}
-let g:ale_fixers = {
-            \   'javascript': ['eslint'],
-            \   'vue': ['eslint'],
-            \   'rust': ['rustfmt'],
-            \   'html': ['tidy'],
-            \   'typescript': ['prettier'],
-            \   'css': ['prettier'],
-            \   'dart': ['dartfmt'],
-            \}
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+nmap <silent> <C-p> <Plug>(coc-diagnostic-prev)
+nmap <silent> <C-n> <Plug>(coc-diagnostic-next)
+
+nmap <silent> <Leader>d <Plug>(coc-definition)
+nmap <silent> <Leader>D <Plug>(coc-type-definition)
+nmap <silent> <Leader>i <Plug>(coc-implementation)
+nmap <silent> <Leader>I <Plug>(coc-references)
+
+nnoremap <silent> <cr> :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <C-d> <Plug>(coc-range-select)
+xmap <silent> <C-d> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<tab>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<s-tab>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <tab> <Plug>(coc-snippets-expand-jump)
+
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 
 " Smart cursorline
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 
-" Prefer LanguageClient for typescript
-augroup typescript_cfg
-    autocmd!
-    autocmd filetype typescript let b:ale_enabled=0
-    autocmd filetype typescript nnoremap <buffer> <F4> :call LanguageClient_textDocument_formatting()<cr>
-    autocmd filetype typescript call deoplete#enable()
-    autocmd filetype typescript call deoplete#custom#buffer_option('auto_complete', v:true)
-    autocmd filetype typescript.tsx let b:ale_enabled=0
-    autocmd filetype typescript.tsx nnoremap <buffer> <F4> :call LanguageClient_textDocument_formatting()<cr>
-    autocmd filetype typescript.tsx call deoplete#enable()
-    autocmd filetype typescript.tsx call deoplete#custom#buffer_option('auto_complete', v:true)
-augroup END
-
-" https://github.com/leafgarland/typescript-vim/pull/140
-" autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
-
-nmap <silent> <C-p> <Plug>(ale_previous_wrap)
-nmap <silent> <C-n> <Plug>(ale_next_wrap)
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '●'
-" GruvboxOrange
-highlight ALEWarningSign term=underline ctermfg=208 ctermbg=237 guifg=#fe8019 guibg=#3c3836
-" GruvboxRed
-highlight ALEErrorSign term=underline ctermfg=167 ctermbg=237 guifg=#fb4934 guibg=#3c3836
-
-
 autocmd! FileType css,scss setl iskeyword+=-
 autocmd FileType vue syntax sync fromstart
 autocmd FileType ocaml setl commentstring=(*%s*)
-
-let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsDontReverseSearchPath=1
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', '.*\.diff$']
 
@@ -229,8 +271,9 @@ command! -bang -nargs=* GGrep
 " Restore cursor position on opening a file
 augroup resCur
     autocmd!
-    autocmd BufWinLeave ?* mkview
-    autocmd BufWinEnter ?* silent! loadview
+    let btToIgnore = ['terminal']
+    autocmd BufWinLeave ?* if index(btToIgnore, &buftype) < 0 | mkview 1
+    autocmd BufWinEnter ?* silent! loadview 1
 augroup END
 
 " Usefull for working on themes
