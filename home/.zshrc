@@ -36,8 +36,12 @@ bindkey "^[[A" history-beginning-search-backward # up
 bindkey "^[[B" history-beginning-search-forward  # down
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+bindkey "^[^[[C" forward-word
+bindkey "^[^[[D" backward-word
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
+bindkey "^[[1~" beginning-of-line
+bindkey "^[[4~" end-of-line
 
 bindkey '^Z' push-input # stash the current input and pop it to the next
                         # command prompt
