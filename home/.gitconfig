@@ -56,17 +56,16 @@
     cpc = cherry-pick --continue
     wdfc = diff -b -w --word-diff=color --cached --word-diff-regex='\\(|\\)|[^[:space:]()]+'
     files = show --pretty="format:" --name-only
-    clean-merge-files = !find '(' \
-        -name '*.BASE.*' \
-        -o -name '*.LOCAL.*' \
-        -o -name '*.REMOTE.*' \
-        -o -name '*.BACKUP.*' \
-        -o -name '*_BASE_*' \
-        -o -name '*_LOCAL_*' \
-        -o -name '*_REMOTE_*' \
-        -o -name '*_BACKUP_*' \
-        -o -name '*.orig' \
-    ')' -delete
+    clean-merge-files = clean -f \
+       '*.BASE.*' \
+       '*.LOCAL.*' \
+       '*.REMOTE.*' \
+       '*.BACKUP.*' \
+       '*_BASE_*' \
+       '*_LOCAL_*' \
+       '*_REMOTE_*' \
+       '*_BACKUP_*' \
+       '*.orig'
     git = !git
     list-branches = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 
