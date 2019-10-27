@@ -114,19 +114,29 @@ export FZF_DEFAULT_COMMAND='command find -L .       \
     \) -prune -o                                    \
     -type f -print -o                               \
     -type l -print 2> /dev/null | cut -b3-'
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
 
-# depot-tools
-#source /etc/profile.d/depot_tools.sh
 
-source /usr/share/doc/pkgfile/command-not-found.zsh
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+function source_if_exists () {
+  if [[ -e "$1" ]]; then
+    source "$1"
+  fi
+}
 
+# Arch Linux
+source_if_exists /etc/profile.d/depot_tools.sh
+source_if_exists /usr/share/doc/pkgfile/command-not-found.zsh
+source_if_exists /usr/share/fzf/completion.zsh
+source_if_exists /usr/share/fzf/key-bindings.zsh
+source_if_exists /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Mac OS
+source_if_exists /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+unset source_if_exists
 
 function load () {
-    source "$HOME/.zsh/conf/$1.zsh"
+  source "$HOME/.zsh/conf/$1.zsh"
 }
 
 load npm-path
@@ -137,4 +147,3 @@ load fzf-extra
 load manydots-magic
 
 unset load
-
