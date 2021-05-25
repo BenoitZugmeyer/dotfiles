@@ -75,6 +75,15 @@
 [merge]
     conflictstyle = diff3
     ff = false
+    tool = diffconflicts
+
+[mergetool "diffconflicts"]
+    cmd = nvim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
+    trustExitCode = true
+
+[mergetool]
+    keepBackup = false
+
 [push]
     default = simple
     followTags = true
