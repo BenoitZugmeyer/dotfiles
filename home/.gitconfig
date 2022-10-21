@@ -26,7 +26,7 @@
     whitespace = space-before-tab,-indent-with-non-tab,tab-in-indent,trailing-space,cr-at-eol,tabwidth=4
     warnAmbiguousRefs = false
     excludesfile = ~/.gitignore
-    pager = less -S
+    pager = delta
 
 [alias]
     st = status -sb
@@ -36,7 +36,6 @@
     cp = cherry-pick
     df = diff
     fa = fetch --all
-    fap = fetch --all --prune
     gerp = grep
     dfc = diff --cached
     lg = log -p -C -D
@@ -50,7 +49,8 @@
     rmd = !git status --porcelain | awk ' /^ D/ { print $2 }' | xargs git rm
     ff = merge --ff-only
     resolve = update-index
-    cia = commit --amend
+    cim = commit --amend
+    cia = commit --amend --no-edit
     rbc = rebase --continue
     rbs = rebase --skip
     cpc = cherry-pick --continue
@@ -74,7 +74,6 @@
 
 [merge]
     conflictstyle = diff3
-    ff = false
     tool = diffconflicts
 
 [mergetool "diffconflicts"]
@@ -87,27 +86,44 @@
 [push]
     default = simple
     followTags = true
+    autoSetupRemote = true
+
 [diff]
     compactionHeuristic = true
     algorithm = patience
     noprefix = true
+
 [diff "json"]
     textconv = jq -S .
+
 [diff "sorted"]
     textconv = sort
+
 [branch]
     autosetuprebase = always
+    sort = -committerdate
+
 [log]
     date = local
+
 [rebase]
     autosquash = true
+
 [tag]
     sort = version:refname
+
 [svn]
     rmdir = true
+
 [interactive]
     singleKey = true
-[pager]
-    log = /usr/share/git/diff-highlight/diff-highlight | less -S
-    diff = /usr/share/git/diff-highlight/diff-highlight | less -S
-    show = /usr/share/git/diff-highlight/diff-highlight | less -S
+    diffFilter = delta --color-only
+
+[pull]
+    rebase = true
+
+[init]
+    defaultBranch = main
+
+[fetch]
+    prune = true
