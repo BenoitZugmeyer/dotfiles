@@ -1,5 +1,0 @@
-{
-  "suggest.enablePreview": true,
-  "codeLens.enable": true,
-  "coc.preferences.formatOnSaveFiletypes": ["typescriptreact", "typescript"]
-}
