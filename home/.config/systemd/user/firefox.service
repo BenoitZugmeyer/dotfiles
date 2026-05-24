@@ -1,9 +1,0 @@
-[Unit]
-Description=Firefox
-
-[Service]
-ExecStart=/usr/bin/firefox
-Restart=always
-
-[Install]
-WantedBy=home.target

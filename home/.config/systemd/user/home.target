@@ -1,5 +1,0 @@
-[Unit]
-Description=Xinitrc Stuff
-
-[Install]
-Alias=default.target

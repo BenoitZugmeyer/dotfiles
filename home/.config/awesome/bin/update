@@ -1,5 +1,0 @@
-#!/bin/sh
-
-sudo pacman -Syu
-echo 'mywidgets.pacman.update()' | awesome-client
-read

@@ -1,8 +1,0 @@
-[Unit]
-Description=handle automounting
-
-[Service]
-ExecStart=/usr/bin/udiskie -c /home/alk/.config/udiskie
-
-[Install]
-WantedBy=home.target
