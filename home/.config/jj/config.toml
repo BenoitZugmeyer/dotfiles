@@ -1,0 +1,41 @@
+[user]
+email = "XXX"
+name = "XXX"
+
+[ui]
+default-command = "log"
+pager = "delta"
+diff-formatter = ":git"
+
+[ui.movement]
+edit = true
+
+[aliases]
+tug = ["bookmark", "move", "--from", "closest_bookmark(@) ~ trunk()", "--to", "closest_pushable(@)"]
+push = ["git", "push"]
+fetch = ["git", "fetch"]
+drop = ["abandon"]
+mergetool = ["resolve", "--tool", "diffconflicts"]
+
+[revset-aliases]
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+'closest_pushable(to)' = 'heads(::to & mutable() & ~description(exact:"") & (~empty() | merges()))'
+'top' = 'heads(@:: ~ empty())'
+wip = '::(visible_heads() ~ bookmarks() ~ remote_bookmarks()) ~ immutable()'
+spam = '::visible_heads() ~ immutable() ~ ::author(benoit)'
+release = 'latest(tags())..trunk()'
+
+[templates]
+git_push_bookmark = '"benoit/push-" ++ change_id.short()'
+
+[snapshot]
+auto-track = "none()"
+
+[merge-tools.diffconflicts]
+program = "nvim"
+merge-args = [
+    "-c", "let g:jj_diffconflicts_marker_length=$marker_length",
+    "-c", "JJDiffConflicts!", "$output", "$base", "$left", "$right",
+]
+merge-tool-edits-conflict-markers = true
+

@@ -7,7 +7,15 @@ prompt_alk_setup() {
         PROMPT="%{$fg_bold[red]%}%n@%m:$PROMPT"
     fi
 
-    RPROMPT="\$(prompt_git_info) %{$fg[yellow]%}%D{%m-%d %H:%M}%{$reset_color%}"
+    RPROMPT="\$(prompt_alk_vcs_info)"
+}
+
+prompt_alk_vcs_info() {
+    if prompt_jj_info_enabled; then
+        prompt_jj_info
+    else
+        prompt_git_info
+    fi
 }
 
 prompt_themes="$prompt_themes alk"  # add our prompt to the collection, so we

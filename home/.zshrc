@@ -142,8 +142,11 @@ function load () {
 load npm-path
 load prompt-alk
 load prompt-git-info
+load prompt-jj-info
 load f
 load fzf-extra
 load manydots-magic
 
 unset load
+
+source <(jj util completion zsh)
