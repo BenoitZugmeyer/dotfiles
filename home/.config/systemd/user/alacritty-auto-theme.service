@@ -1,0 +1,12 @@
+[Unit]
+Description=Alacritty automated theme switching
+Require=dbus.service
+After=dbus.service
+
+[Service]
+ExecStart=/bin/python /home/%u/.bin/alacritty-auto-theme.py
+Type=simple
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

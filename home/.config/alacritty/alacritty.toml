@@ -1,0 +1,17 @@
+[general]
+import = [
+  #"themes/catppuccin.toml", # dark theme
+  "themes/catppuccin_latte.toml", # light theme
+]
+
+[font]
+size = 11
+
+[font.normal]
+family = "IosevkaTerm Nerd Font"
+
+[window]
+padding = { x = 4, y = 4 }
+
+[selection]
+save_to_clipboard = true
