@@ -71,8 +71,9 @@ vim.api.nvim_create_autocmd('PackChanged', {
 
     if ev.data.spec.name == 'telescope-fzf-native.nvim' then
       build 'make'
-    elseif ev.data.spec.name == 'blink.nvim' then
-      vim.cmd.packadd 'blink.nvim'
+    elseif ev.data.spec.name == 'blink.cmp' then
+      vim.cmd.packadd 'blink.lib'
+      vim.cmd.packadd 'blink.cmp'
       require('blink.cmp').build():wait(60000)
     elseif ev.data.spec.name == 'nvim-treesitter' then
       vim.cmd.packadd 'nvim-treesitter'
@@ -132,7 +133,7 @@ require('conform').setup {
     else
       return {
         timeout_ms = 500,
-        lsp_format = 'fallback',
+        lsp_format = 'prefer',
       }
     end
   end,
@@ -143,6 +144,7 @@ require('conform').setup {
     typescript = { 'prettier' },
     typescriptreact = { 'prettier' },
     json = { 'prettier' },
+    markdown = { 'prettier' },
     css = { 'prettier' },
     html = { 'prettier' },
     nix = { 'nixfmt' },
@@ -211,7 +213,6 @@ vim.api.nvim_create_autocmd('FileType', {
     end
 
     vim.treesitter.start(buf, language)
-    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
 
@@ -281,8 +282,55 @@ require('lazydev').setup {
 }
 
 vim.pack.add { 'https://github.com/neovim/nvim-lspconfig' }
+
+vim.lsp.log.set_level 'info'
+vim.lsp.inlay_hint.enable(true)
+
+local base_on_attach = vim.lsp.config.eslint.on_attach
 vim.lsp.config('eslint', {
   filetypes = vim.list_extend(vim.lsp.config.eslint.filetypes, { 'css' }),
+
+  settings = {
+    nodePath = '.yarn/sdks',
+    workingDirectory = {
+      -- Defaults to 'auto', and eslint will look for the closest directory containing a
+      -- package.json file. This breaks eslint-import-resolver-typescript because it reads the
+      -- tsconfig in cwd, and there isn't any.
+      -- Issue: https://github.com/neovim/nvim-lspconfig/issues/4227
+      mode = 'location',
+    },
+  },
+  on_attach = function(client, bufnr)
+    if base_on_attach then
+      base_on_attach(client, bufnr)
+    end
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      buffer = bufnr,
+      command = 'LspEslintFixAll',
+    })
+  end,
+})
+
+-- Use the project-local oxfmt binary when available, so the LSP version
+-- matches the project-pinned version and reads oxfmt.config.ts correctly.
+vim.lsp.config('oxfmt', {
+  cmd = function(dispatchers, config)
+    local root = (config or {}).root_dir
+    local cmd = 'oxfmt'
+    if root then
+      local candidates = {
+        vim.fs.joinpath(root, '.yarn/sdks/oxfmt/bin-oxfmt.js'),
+        vim.fs.joinpath(root, 'node_modules/.bin/oxfmt'),
+      }
+      for _, candidate in ipairs(candidates) do
+        if vim.fn.executable(candidate) == 1 then
+          cmd = candidate
+          break
+        end
+      end
+    end
+    return vim.lsp.rpc.start({ cmd, '--lsp' }, dispatchers)
+  end,
 })
 
 vim.pack.add { 'https://github.com/williamboman/mason.nvim' }
@@ -307,22 +355,6 @@ require('fidget').setup {
     override_vim_notify = true,
   },
 }
-
-vim.lsp.inlay_hint.enable(true)
-vim.lsp.config('eslint', {
-  on_attach = function(_, bufnr)
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      group = vim.api.nvim_create_augroup('EslintFixOnSave', { clear = false }),
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.code_action {
-          context = { only = { 'source.fixAll.eslint' } },
-          apply = true,
-        }
-      end,
-    })
-  end,
-})
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
